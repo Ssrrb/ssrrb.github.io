@@ -2,9 +2,9 @@ import { Icons } from "@/components/icons";
 import { DATA } from "./resume";
 
 const projectTranslations = {
-  EVA360: {
+  cheki: {
     description:
-      "Diseñé un sistema empresarial para evaluaciones permite crear formularios, distribuirlos a empleados y generar informes completos con métricas. El sistema agiliza la evaluación, mejora la agilidad y aumenta la precisión de los datos, aportando información útil para el crecimiento organizacional.",
+      "Demo de una app startup de facilitamiento de pagos online.",
   },
   "Heko pora": {
     description:
@@ -29,21 +29,21 @@ const projectTranslations = {
 export const DATA_ES = {
   ...DATA,
   description:
-    "Ingeniero de software full stack con experiencia en producción en Python, TypeScript, sistemas en la nube y servicios de IA.",
+  "Estudiante de Análisis de Sistemas con experiencia en desarrollo de software, infraestructura cloud y devops.",
   summary:
-    "Trabajo tiempo completo mientras estudio; estoy acostumbrado a asumir responsabilidad y entregar bajo presión. Tengo experiencia liderando equipos y proyectos con arquitecturas cloud-native, servicios de IA y sistemas backend escalables.",
+    "Soy una persona curiosa me gusta ayudar, programar, ser activo, leer, trabajar en equipos, hacer deportes y los proyectos ambiciosos.",
   work: [
     {
       ...DATA.work[0],
       title: "Ingeniero de Software",
       description:
-        "Construí y mantuve servicios backend con Python y Node.js en entornos de producción. Diseñé APIs y modelos de datos para aplicaciones internas y empresariales. Desplegué y operé servicios en Google Cloud (CI/CD, cargas contenerizadas). Trabajé en backend y frontend cuando fue necesario para desbloquear entregas.",
+        "Construí y mantuve servicios con Python y Node.js en entornos de producción. Diseñé APIs y modelos de datos para aplicaciones internas y empresariales. Desplegué y operé servicios en Google Cloud (CI/CD, cargas contenerizadas).",
     },
     {
       ...DATA.work[1],
       title: "Técnico de IT",
       description:
-        "Comencé como pasante y luego fui contratado como técnico de IT, administrando y manteniendo servidores, estaciones de trabajo y bases de datos con DB2 y Postgres. Automaticé el monitoreo y mantenimiento de IT en RHEL usando Datadog, Python e Instana",
+        "Comencé como pasante y luego fui contratado como técnico de TI, administrando y manteniendo servidores, workflows y bases de datos con DB2 y Postgres. Usé RHEL, Datadog, Bash e Instana",
     },
   ],
   education: [

@@ -126,29 +126,26 @@ export const DATA = {
   ],
   projects: [
     {
-      title: "rh-360",
-      href: "",
-      dates: "Aug 2025 - Jan 2026",
+      title: "cheki",
+      href: "https://cerramos-web-622748835636.us-central1.run.app/es",
+      dates: "May 2026",
       active: true,
       description:
-        "Designed an enterprise evaluation system that enables HR departments to create evaluation forms, distribute them to employees, and generate reports on performance metrics. The system streamlines the evaluation process, enhances data accuracy and empowers HR managers to make informed decisions.",
+        "Built a commerce landing experience for Cheki, focused on helping Paraguayan businesses publish products or services online and start selling quickly.",
       technologies: [
         "Next.js",
         "Typescript",
-        "PostgreSQL",
-        "Prisma",
         "TailwindCSS",
-        "Shadcn UI",
-        "Clerk",
+        "GCP",
       ],
       links: [
         {
-          type: "Webapp",
-          href: "https://rh360-823216545609.us-central1.run.app",
+          type: "Website",
+          href: "https://cerramos-web-622748835636.us-central1.run.app/es",
           icon: <Icons.globe className="size-3" />,
         },
       ],
-      image: "/eva360.png",
+      image: "/cheki-app.png",
       video: "",
     },
     {
