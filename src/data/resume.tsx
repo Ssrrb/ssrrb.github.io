@@ -8,9 +8,9 @@ export const DATA = {
   location: "Asunción, PY",
   locationLink: "https://www.google.com/maps/place/asunci%C3%B3n,+paraguay/",
   description:
-    "Full Stack Software Engineer with production experience in Python, Typescript, cloud systems, and AI services.",
+    "Systems Analysis student with experience in software development, cloud infrastructure, and DevOps.",
   summary:
-    "Working full time while studying; accustomed to ownership and delivery under constraints. Experience leading teams and projects using cloud-native architectures, AI services, and scalable backend systems.",
+    "I am energetic, disciplined, and enjoy working in teams. Outside of work, I like running, training, playing tennis and soccer, reading, and traveling.",
   avatarUrl: "/me.jpeg",
   skills: [
     "Python",
@@ -75,7 +75,7 @@ export const DATA = {
       start: "Aug 2024",
       end: "Current",
       description:
-        "Built and maintained backend services using Python and Node.js in production environments. Designed APIs and data models backing internal and enterprise-facing applications. Deployed and operated services on Google Cloud (CI/CD, containerized workloads). Worked across backend and frontend when required to unblock delivery.",
+        "Built and maintained production services with Python and Node.js. Designed APIs and data models for internal and enterprise applications. Deployed and operated services on Google Cloud with CI/CD and containerized workloads.",
     },
     {
       company: "Softshop",
@@ -87,14 +87,14 @@ export const DATA = {
       start: "Dec 2023",
       end: "May 2024",
       description:
-        "Started as an intern later contracted for an IT technician role, managed and maintained servers, workstations, and databases using DB2, and Postgres. Automated IT monitoring and maintenance in RHEL used Datadog, Python and Instana, helped reducing downtime by 99,9%.",
+        "Started as an intern and was later hired as an IT technician. Managed servers, workflows, and databases with DB2 and Postgres. Used RHEL, Datadog, Bash, and Instana.",
     },
   ],
   education: [
     {
       school: "Universidad Católica Nuestra Señora de la Asunción",
       href: "https://universidadcatolica.edu.py/producto/analisis-de-sistemas-asuncion/",
-      degree: "Analisis de Sistemas Informáticos",
+      degree: "Information Systems Analysis",
       logoUrl: "/logo-UC-PNG.png",
       start: "2023",
       end: "2027",
@@ -131,7 +131,7 @@ export const DATA = {
       dates: "May 2026",
       active: true,
       description:
-        "Built a commerce landing experience for Cheki, focused on helping Paraguayan businesses publish products or services online and start selling quickly.",
+        "Demo of an app for a startup that makes online payments easier.",
       technologies: [
         "Next.js",
         "Typescript",
@@ -154,7 +154,7 @@ export const DATA = {
       dates: "In progress",
       active: true,
       description:
-        "Developed an open-source system for medical appointments where users can select and filter clinicians based on their medical secure.",
+        "Developed an open-source medical appointment system. It lets users search for doctors, filter them by health insurance, and book appointments.",
       technologies: [
         "Node.js",
         "Express.js",
@@ -182,10 +182,10 @@ export const DATA = {
     {
       title: "Vida Farma",
       href: "https://vida-farma-823216545609.us-central1.run.app",
-      dates: "In progress",
+      dates: "Jul 2025 - Sep 2025",
       active: true,
       description:
-        "Built a project for a Pharma focused on presenting a modern pharmacy web experience with clear product discovery and a production-ready deployment.",
+        "E-commerce demo for a pharmacy. It shows a product catalog and purchase flow in a clear web interface.",
       technologies: [
         "Typescript",
         "TailwindCSS",
@@ -208,7 +208,7 @@ export const DATA = {
       dates: "July 2025 -  September 2025",
       active: true,
       description:
-        "Developed a website for a national school, contacting responsibles and managing the domain.",
+        "Developed the website for a national school. Coordinated with the school administrators and managed the domain.",
       technologies: [
         "React",
         "Typescript",
@@ -238,7 +238,7 @@ export const DATA = {
       dates: "Dec 2024 - Feb 2025",
       active: true,
       description:
-        "Built a system to efficiently let users create Agents and update their knowledge base using company documents, to interact with it using natural language. Used GCP Vertex AI, AI SDK, and Langchain.",
+        "Built a RAG system to create agents, upload internal documents, and query them in natural language. Used GCP Vertex AI, AI SDK, and Langchain.",
       technologies: [
         "Next.js",
         "Typescript",
@@ -266,7 +266,7 @@ export const DATA = {
       dates: "2024",
       location: "Online",
       description:
-        "Certified Google Educator Level 1, demonstrating proficiency in integrating Google Workspace tools into educational and professional environments to enhance productivity and collaboration.",
+        "Google Educator Level 1 certification. Validates the use of Google Workspace to organize classes, collaborate, and improve educational processes.",
       image:
         "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/1024px-Google_%22G%22_logo.svg.png",
       links: [
@@ -292,7 +292,7 @@ export const DATA = {
       dates: "October 2025",
       location: "Florida, Orlando",
       description:
-        "Attended IBM TechXchange Conference 2025, a premier event bringing together technology leaders, developers, and innovators to explore the latest advancements in AI, cloud computing, and enterprise solutions.",
+        "Attended IBM TechXchange 2025 in Orlando, focused on AI, cloud, and enterprise solutions.",
       image:
         "/ibm.jpg",
       links: [],
@@ -302,7 +302,7 @@ export const DATA = {
       dates: "2020 - Present",
       location: "Asunción, Paraguay",
       description:
-        "Active volunteer in community programs such as Apoyo Escolar, volunteering for education and mentoring young students interested in programming and computer science.",
+        "Volunteer in community programs such as Apoyo Escolar. I support students and mentor young people interested in programming and computer science.",
       image:
         "https://cdn-icons-png.flaticon.com/512/2917/2917995.png",
       links: [],
