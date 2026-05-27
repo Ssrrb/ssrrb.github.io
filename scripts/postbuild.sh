@@ -75,4 +75,37 @@ EOF
 # 3. CNAME — persist the custom domain in the deployment artifact
 echo "sebastianrojas.lat" > "$OUT_DIR/CNAME"
 
-echo "[postbuild] Done — created index.html, 404.html, CNAME"
+# 4. Create locale index.html files for GitLab Pages directory routing
+# Next.js static export generates flat HTML files (e.g., es.html, en.html)
+# but with trailingSlash:true, the root redirect sends users to /es/ or /en/.
+# GitHub Pages expects es/index.html to serve /es/ — so we copy the flat
+# HTML into the locale directory.
+# Disable extglob temporarily so we can glob *.html without matching dirs.
+shopt -s nullglob extglob
+for flat_html in "$OUT_DIR"/!(_)*.html; do
+  base_name=$(basename "$flat_html" .html)
+
+  # Skip special files
+  case "$base_name" in
+    index|404|_not-found) continue ;;
+  esac
+
+  # If there's a directory with the same base name, create index.html inside it
+  target_dir="$OUT_DIR/$base_name"
+  if [ -d "$target_dir" ] && [ ! -f "$target_dir/index.html" ]; then
+    cp "$flat_html" "$target_dir/index.html"
+    echo "[postbuild] Created $target_dir/index.html from $(basename "$flat_html")"
+  fi
+
+  # Also recurse into sub-routes like es/blog.html → es/blog/index.html
+  parent_dir=$(dirname "$flat_html" | sed "s|^$OUT_DIR/||")
+  sub_flat="$OUT_DIR/$parent_dir/$base_name.html"
+  sub_dir="$OUT_DIR/$parent_dir/$base_name"
+  if [ -f "$sub_flat" ] && [ -d "$sub_dir" ] && [ ! -f "$sub_dir/index.html" ]; then
+    cp "$sub_flat" "$sub_dir/index.html"
+    echo "[postbuild] Created $sub_dir/index.html from $parent_dir/$base_name.html"
+  fi
+done
+shopt -u nullglob extglob
+
+echo "[postbuild] Done — created index.html, 404.html, CNAME, locale index files"
