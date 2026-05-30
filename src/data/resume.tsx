@@ -8,23 +8,27 @@ export const DATA = {
   location: "Asunción, PY",
   locationLink: "https://www.google.com/maps/place/asunci%C3%B3n,+paraguay/",
   description:
-    "Systems Analysis student with experience in software development, cloud infrastructure, and DevOps.",
+    "Systems Analysis student focused on solution engineering, API integrations, cloud deployments, and technical implementation.",
   summary:
-    "I am energetic, disciplined, and enjoy working in teams. Outside of work, I like running, training, playing tennis and soccer, reading, and traveling.",
+    "Software engineer with hands-on experience building APIs, deploying cloud services, documenting technical solutions, and working with stakeholders from requirements through delivery. I enjoy translating business needs into practical technical implementations and helping teams adopt reliable systems.",
   avatarUrl: "/me.jpeg",
   skills: [
+    "API Integrations",
+    "Solution Design",
+    "Technical Documentation",
+    "Customer Enablement",
     "Python",
     "Node.js",
-    "Go",
+    "TypeScript",
     "PostgreSQL",
     "Google Cloud Platform",
     "Docker",
     "CI/CD",
     "React / Next.js",
-    "TypeScript",
+    "Go",
     "RAG",
     "Vertex AI",
-    "Huggingface"
+    "Huggingface",
   ],
   navbar: [
     { href: "/", icon: HomeIcon, label: "Home" },
@@ -75,7 +79,7 @@ export const DATA = {
       start: "Aug 2024",
       end: "Current",
       description:
-        "Built and maintained production services with Python and Node.js. Designed APIs and data models for internal and enterprise applications. Deployed and operated services on Google Cloud with CI/CD and containerized workloads.",
+        "Built and maintained production services with Python and Node.js for internal and enterprise use cases. Collected requirements, designed APIs and data models, documented implementation details, and deployed containerized services on Google Cloud with CI/CD.",
     },
     {
       company: "Softshop",
@@ -87,7 +91,7 @@ export const DATA = {
       start: "Dec 2023",
       end: "May 2024",
       description:
-        "Started as an intern and was later hired as an IT technician. Managed servers, workflows, and databases with DB2 and Postgres. Used RHEL, Datadog, Bash, and Instana.",
+        "Started as an intern and was later hired as an IT technician. Supported server operations, workflows, monitoring, and database administration with DB2 and Postgres. Worked with RHEL, Datadog, Bash, and Instana to troubleshoot issues and keep systems reliable.",
     },
   ],
   education: [
@@ -131,7 +135,7 @@ export const DATA = {
       dates: "May 2026",
       active: true,
       description:
-        "Demo of an app for a startup that makes online payments easier.",
+        "Demo of a startup payment application. Translated product requirements into a working web flow and deployed it on Google Cloud for stakeholder review.",
       technologies: [
         "Next.js",
         "Typescript",
@@ -154,7 +158,7 @@ export const DATA = {
       dates: "In progress",
       active: true,
       description:
-        "Developed an open-source medical appointment system. It lets users search for doctors, filter them by health insurance, and book appointments.",
+        "Developed an open-source medical appointment system with appointment booking, doctor search, health insurance filters, and database integration. Designed the service flow and deployed the application on Google Cloud.",
       technologies: [
         "Node.js",
         "Express.js",
@@ -185,7 +189,7 @@ export const DATA = {
       dates: "Jul 2025 - Sep 2025",
       active: true,
       description:
-        "E-commerce demo for a pharmacy. It shows a product catalog and purchase flow in a clear web interface.",
+        "E-commerce demo for a pharmacy with a product catalog, purchase flow, and PostgreSQL-backed data model. Built the implementation from requirements to a deployed cloud demo.",
       technologies: [
         "Typescript",
         "TailwindCSS",
@@ -208,7 +212,7 @@ export const DATA = {
       dates: "July 2025 -  September 2025",
       active: true,
       description:
-        "Developed the website for a national school. Coordinated with the school administrators and managed the domain.",
+        "Developed and delivered the website for a national school. Coordinated requirements with school administrators, managed the domain setup, and handled the production launch.",
       technologies: [
         "React",
         "Typescript",
@@ -238,7 +242,7 @@ export const DATA = {
       dates: "Dec 2024 - Feb 2025",
       active: true,
       description:
-        "Built a RAG system to create agents, upload internal documents, and query them in natural language. Used GCP Vertex AI, AI SDK, and Langchain.",
+        "Built a RAG system that lets teams create agents, upload internal documents, and query them in natural language. Integrated GCP Vertex AI, AI SDK, Langchain, PostgreSQL, and Milvus, with documentation for setup and usage.",
       technologies: [
         "Next.js",
         "Typescript",
@@ -266,7 +270,7 @@ export const DATA = {
       dates: "2024",
       location: "Online",
       description:
-        "Google Educator Level 1 certification. Validates the use of Google Workspace to organize classes, collaborate, and improve educational processes.",
+        "Google Educator Level 1 certification. Validates the use of Google Workspace to organize sessions, collaborate, and improve enablement processes.",
       image:
         "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/1024px-Google_%22G%22_logo.svg.png",
       links: [
@@ -302,7 +306,7 @@ export const DATA = {
       dates: "2020 - Present",
       location: "Asunción, Paraguay",
       description:
-        "Volunteer in community programs such as Apoyo Escolar. I support students and mentor young people interested in programming and computer science.",
+        "Volunteer in community programs such as Apoyo Escolar. I support students and mentor young people interested in programming and computer science through practical guidance and learning sessions.",
       image:
         "https://cdn-icons-png.flaticon.com/512/2917/2917995.png",
       links: [],
