@@ -11,7 +11,7 @@ export const DATA = {
     "Systems Analysis student focused on solution engineering, API integrations, cloud deployments, and technical implementation.",
   summary:
     "Software engineer with hands-on experience building APIs, deploying cloud services, documenting technical solutions, and working with stakeholders from requirements through delivery. I enjoy translating business needs into practical technical implementations and helping teams adopt reliable systems.",
-  avatarUrl: "/me.png",
+  avatarUrl: "/me.jpeg",
   skills: [
     "API Integrations",
     "Solution Design",
