@@ -17,7 +17,7 @@ export default async function BlogPage({ params }: { params: Promise<{ locale: s
   setRequestLocale(locale);
 
   const posts = await getBlogPosts();
-  const t = await getTranslations();
+  const t = await getTranslations({ locale });
 
   return (
     <section>
@@ -37,7 +37,7 @@ export default async function BlogPage({ params }: { params: Promise<{ locale: s
           <BlurFade delay={BLUR_FADE_DELAY * 2 + id * 0.05} key={post.slug}>
             <Link
               className="flex flex-col space-y-1 mb-4"
-              href={`/${locale}/blog/${post.slug}`}
+              href={`${locale === "en" ? "" : `/${locale}`}/blog/${post.slug}`}
             >
               <div className="w-full flex flex-col">
                 <p className="tracking-tight">{post.metadata.title}</p>

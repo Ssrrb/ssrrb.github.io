@@ -18,7 +18,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
   // Enable static rendering
   setRequestLocale(locale);
 
-  const t = await getTranslations();
+  const t = await getTranslations({ locale });
   const DATA = getResumeData(locale);
   return (
     <main className="flex flex-col min-h-[100dvh] space-y-10">

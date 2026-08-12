@@ -9,10 +9,10 @@ export const defaultLocale: Locale = "en";
 
 export default getRequestConfig(async ({ requestLocale }) => {
   // Get the locale from the request
-  let locale = await requestLocale;
+  const locale = (await requestLocale) ?? defaultLocale;
 
   // Validate that the incoming `locale` parameter is valid
-  if (!locale || !locales.includes(locale as Locale)) {
+  if (!locales.includes(locale as Locale)) {
     notFound();
   }
 

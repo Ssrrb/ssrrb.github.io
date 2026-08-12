@@ -14,11 +14,15 @@ export function LanguageToggle() {
   const toggleLanguage = () => {
     const nextLocale = locale === "en" ? "es" : "en";
 
-    // Remove the current locale from the pathname
-    const pathnameWithoutLocale = pathname.replace(`/${locale}`, "");
+    const pathnameWithoutLocale =
+      locale === "en" ? pathname : pathname.replace(/^\/(en|es)(?=\/|$)/, "") || "/";
+    const nextPathname =
+      nextLocale === "en"
+        ? pathnameWithoutLocale
+        : `/es${pathnameWithoutLocale === "/" ? "" : pathnameWithoutLocale}`;
 
     startTransition(() => {
-      router.replace(`/${nextLocale}${pathnameWithoutLocale}`);
+      router.replace(nextPathname);
     });
   };
 

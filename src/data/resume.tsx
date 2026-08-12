@@ -11,7 +11,7 @@ export const DATA = {
     "Systems Analysis student focused on solution engineering, API integrations, cloud deployments, and technical implementation.",
   summary:
     "Software engineer with hands-on experience building APIs, deploying cloud services, documenting technical solutions, and working with stakeholders from requirements through delivery. I enjoy translating business needs into practical technical implementations and helping teams adopt reliable systems.",
-  avatarUrl: "/me.jpeg",
+  avatarUrl: "/me.png",
   skills: [
     "API Integrations",
     "Solution Design",
@@ -149,7 +149,7 @@ export const DATA = {
           icon: <Icons.globe className="size-3" />,
         },
       ],
-      image: "/cheki-app.png",
+      image: "/cheki-app.webp",
       video: "",
     },
     {
@@ -180,7 +180,7 @@ export const DATA = {
           icon: <Icons.github className="size-3" />,
         },
       ],
-      image: "/heko-pora.png",
+      image: "/heko-pora.webp",
       video: "",
     },
     {
@@ -203,7 +203,7 @@ export const DATA = {
           icon: <Icons.globe className="size-3" />,
         },
       ],
-      image: "/vida-farm.png",
+      image: "/vida-farm.webp",
       video: "",
     },
     {
@@ -232,7 +232,7 @@ export const DATA = {
           icon: <Icons.github className="size-3" />,
         },
       ],
-      image: "/mcal.png",
+      image: "/mcal.webp",
       video:
         "",
     },
@@ -259,7 +259,7 @@ export const DATA = {
           icon: <Icons.github className="size-3" />,
         },
       ],
-      image: "/rag-chatbot.png",
+      image: "/rag-chatbot.webp",
       video:
         "",
     },
