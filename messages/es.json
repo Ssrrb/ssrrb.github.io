@@ -10,10 +10,16 @@
   "sections": {
     "about": "Sobre mí",
     "work": "Experiencia Laboral",
+    "highlights": "Logros",
     "education": "Educación",
     "skills": "Habilidades",
     "projects": "Proyectos",
     "moreInProgress": "Más & En Progreso"
+  },
+  "highlights": {
+    "title": "Logros",
+    "heading": "Cosas de las que estoy orgulloso",
+    "description": "Trabajo que fue más allá de una pantalla. Estos son {count} de los momentos que más pesan."
   },
   "work": {
     "present": "Actualidad",

@@ -8,13 +8,14 @@ export const DATA = {
   location: "Asunción, PY",
   locationLink: "https://www.google.com/maps/place/asunci%C3%B3n,+paraguay/",
   description:
-    "Systems Analysis student focused on solution engineering, API integrations, cloud deployments, and technical implementation.",
+    "Tech Lead and sole engineer for Arai, Paraguay's first Chromebook brand. Systems Analysis student focused on cloud, AI integration, and product engineering.",
   summary:
-    "Software engineer with hands-on experience building APIs, deploying cloud services, documenting technical solutions, and working with stakeholders from requirements through delivery. I enjoy translating business needs into practical technical implementations and helping teams adopt reliable systems.",
+    "Tech Lead and the only engineer on the team behind Arai, a technology brand of SoftShop and Paraguay's first Chromebook brand. I build and maintain the storefront, the developer tooling and the enablement material, and I own the technical roadmap end to end — from ChromeOS and LTE connectivity work through to how AI features get used on the device. I also design hands-on programs that put real tools in front of people who have never used them; my most recent one put ~400 Paraguayan students aged 14 to 17 through a live entrepreneurship competition, and was covered by 5Días. Before Arai I built production services and RAG systems at SoftShop.",
   avatarUrl: "/me.jpeg",
   skills: [
-    "API Integrations",
+    "Technical Leadership",
     "Solution Design",
+    "API Integrations",
     "Technical Documentation",
     "Customer Enablement",
     "Python",
@@ -25,9 +26,14 @@ export const DATA = {
     "Docker",
     "CI/CD",
     "React / Next.js",
+    "Three.js / React Three Fiber",
+    "HTML5 Canvas",
+    "WebSockets",
+    "Agent Harness Engineering",
+    "MCP",
+    "Local Inference / GGUF",
+    "ChromeOS",
     "Go",
-    "RAG",
-    "Vertex AI",
     "Huggingface",
   ],
   navbar: [
@@ -70,6 +76,18 @@ export const DATA = {
 
   work: [
     {
+      company: "Arai",
+      href: "https://arai.la/en",
+      badges: ["SoftShop"],
+      location: "Asunción, Paraguay",
+      title: "Tech Lead",
+      logoUrl: "/arai.png",
+      start: "Jun 2026",
+      end: "Current",
+      description:
+        "Lead technology for Arai, a technology brand of SoftShop and Paraguay's first Chromebook brand, as the only engineer on the team. Build and maintain the arai.la storefront across locales, and own the roadmap for the device line: LTE connectivity and carrier provisioning, and bringing cloud AI features onto Chromebooks. Also lead the brand's hands-on programme for schools and labs, which is where the bootcamp work comes from.",
+    },
+    {
       company: "SoftShop",
       href: "https://softshop.com.py",
       badges: [],
@@ -77,9 +95,9 @@ export const DATA = {
       title: "Software Engineer",
       logoUrl: "/softshop.png",
       start: "Aug 2024",
-      end: "Current",
+      end: "May 2026",
       description:
-        "Built and maintained production services with Python and Node.js for internal and enterprise use cases. Collected requirements, designed APIs and data models, documented implementation details, and deployed containerized services on Google Cloud with CI/CD.",
+        "Built and maintained production services with Python and Node.js for internal and enterprise use cases. Collected requirements, designed APIs and data models, documented implementation details, and deployed containerized services on Google Cloud with CI/CD. Handled pre-sales technical support for Google (GCP, Workspace, Ads), IBM and Arai.",
     },
     {
       company: "Softshop",
@@ -129,6 +147,112 @@ export const DATA = {
     },
   ],
   projects: [
+    {
+      title: "Bootcamp for schools — Team Arai",
+      href: "https://5dias.com.py/article/cuando-la-creatividad-transforma-una-idea-en-un-desafo-emprendedor",
+      dates: "Sep 2026",
+      active: true,
+      description:
+        "Designed and delivered a live entrepreneurship bootcamp for ~400 Paraguayan students aged 14 to 17, run as a real-time competition instead of a lecture: teams defined a product, chose an audience, built a brand identity and shipped a website in roughly 20 to 25 minutes while the auditorium voted by QR code. The whole format was rehearsed first on a fictional anti-stress ball brand: the pixel-art game that opened the session and served ~200 concurrent players, and the 3D store below were both built for it, alongside the lab guides and the digital campaigns. Covered by 5Días.",
+      technologies: [
+        "HTML5 Canvas",
+        "WebSockets",
+        "PostgreSQL",
+        "Three.js",
+        "React",
+        "Node.js",
+        "Docker",
+      ],
+      links: [
+        {
+          type: "Press",
+          href: "https://5dias.com.py/article/cuando-la-creatividad-transforma-una-idea-en-un-desafo-emprendedor",
+          icon: <Icons.globe className="size-3" />,
+        },
+        {
+          type: "Game",
+          href: "https://github.com/Ssrrb/arai-demo",
+          icon: <Icons.github className="size-3" />,
+        },
+        {
+          type: "Store",
+          href: "https://github.com/Ssrrb/arai-mic-web",
+          icon: <Icons.github className="size-3" />,
+        },
+        {
+          type: "Live store",
+          href: "https://tuku-tienda.ai.studio/",
+          icon: <Icons.globe className="size-3" />,
+        },
+      ],
+      image: "/tuku-card.webp",
+      video: "",
+    },
+    {
+      title: "guayaba-ai",
+      href: "https://github.com/Ssrrb/guayaba-ai",
+      dates: "Sep 2026 - Present",
+      active: true,
+      description:
+        "Ongoing harness engineering on Guayaba, an agent harness built on the open-source DeepSeek dsh architecture. Focused on the runtime layer: client internationalization (a full Spanish locale with tests) and agent observability (CI failure reporting, Sentry error tracking), plus the Guayaba branding across the web app and documentation.",
+      technologies: [
+        "TypeScript",
+        "Agent Harnesses",
+        "i18n",
+        "Sentry",
+        "CI/CD",
+      ],
+      links: [
+        {
+          type: "Source",
+          href: "https://github.com/Ssrrb/guayaba-ai",
+          icon: <Icons.github className="size-3" />,
+        },
+      ],
+      image: "",
+      video: "",
+    },
+    {
+      title: "go-futbol",
+      href: "https://github.com/Ssrrb/go-futbol",
+      dates: "2026",
+      active: true,
+      description:
+        "Real-time player rankings for the Paraguayan Primera División, built from the official APF data feed.",
+      technologies: [],
+      links: [
+        {
+          type: "Source",
+          href: "https://github.com/Ssrrb/go-futbol",
+          icon: <Icons.github className="size-3" />,
+        },
+      ],
+      image: "",
+      video: "",
+    },
+    {
+      title: "flash-attention-from-scratch",
+      href: "https://github.com/Ssrrb/flash-attention-from-scratch",
+      dates: "Aug 2026 - Present",
+      active: true,
+      description:
+        "My hobby for learning AI from first principles: rebuilding FlashAttention-2 in Triton straight from the paper, working through the theory with notes on multi-head attention, online softmax, tensor layouts, software pipelining and the GPU/CUDA model underneath it.",
+      technologies: [
+        "Triton",
+        "CUDA",
+        "GPU kernels",
+        "Mathematics",
+      ],
+      links: [
+        {
+          type: "Source",
+          href: "https://github.com/Ssrrb/flash-attention-from-scratch",
+          icon: <Icons.github className="size-3" />,
+        },
+      ],
+      image: "",
+      video: "",
+    },
     {
       title: "cheki",
       href: "https://cerramos-web-622748835636.us-central1.run.app/es",
@@ -262,6 +386,17 @@ export const DATA = {
       image: "/rag-chatbot.webp",
       video:
         "",
+    },
+  ],
+  highlights: [
+    {
+      title: "Arai newsletter",
+      dates: "2026 - Present",
+      location: "Arai, Paraguay",
+      description:
+        "Created and now write the newsletter for Arai, the audience-facing channel for a Chromebook brand where most of the technical content would otherwise only reach resellers and admins.",
+      image: "/arai.png",
+      links: [],
     },
   ],
   moreInProgress: [

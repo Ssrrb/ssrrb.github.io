@@ -10,10 +10,16 @@
   "sections": {
     "about": "About",
     "work": "Work Experience",
+    "highlights": "Highlights",
     "education": "Education",
     "skills": "Skills",
     "projects": "Projects",
     "moreInProgress": "More & In Progress"
+  },
+  "highlights": {
+    "title": "Highlights",
+    "heading": "Things I'm proud of",
+    "description": "Work that reached beyond a screen. Here are {count} of the moments that stand out."
   },
   "work": {
     "present": "Present",

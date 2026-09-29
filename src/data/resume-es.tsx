@@ -2,6 +2,22 @@ import { Icons } from "@/components/icons";
 import { DATA } from "./resume";
 
 const projectTranslations = {
+  "Bootcamp for schools — Team Arai": {
+    description:
+      "Diseñé y dicté un bootcamp de emprendimiento en vivo para ~400 estudiantes paraguayos de 14 a 17 años, ejecutado como competencia en tiempo real en lugar de una clase: los equipos definieron un producto, eligieron su público, construyeron una identidad de marca y publicaron un sitio web en unos 20 a 25 minutos mientras el auditorio votaba por código QR. Todo el formato se ensayó primero sobre una marca ficticia de pelotitas antiestrés: el juego en pixel art que abrió la sesión y atendió ~200 jugadores concurrentes, y la tienda 3D de abajo se construyeron para ella, junto con las guías de los laboratorios y las campañas digitales. Cubierto por 5Días.",
+  },
+  "guayaba-ai": {
+    description:
+      "Harness engineering en curso sobre Guayaba, un harness de agentes construido sobre la arquitectura open source DeepSeek dsh. Enfocado en la capa de runtime: internacionalización del cliente (un locale en español completo con sus tests) y observabilidad del agente (reportes de fallos en CI, tracking con Sentry), más la marca Guayaba en la web y en la documentación.",
+  },
+  "go-futbol": {
+    description:
+      "Rankings de jugadores en tiempo real de la Primera División paraguaya, construidos a partir del feed de datos oficial de la APF.",
+  },
+  "flash-attention-from-scratch": {
+    description:
+      "Mi hobby para aprender IA desde los principios: reconstruir FlashAttention-2 en Triton directamente desde el paper, trabajando la teoría con notas sobre atención multi-cabeza, softmax online, layouts de tensores, software pipelining y el modelo de GPU/CUDA que hay debajo.",
+  },
   cheki: {
     description:
       "Demo de una aplicación de pagos para una startup. Convertí requerimientos de producto en un flujo web funcional y lo desplegué en Google Cloud para revisión con stakeholders.",
@@ -29,18 +45,24 @@ const projectTranslations = {
 export const DATA_ES = {
   ...DATA,
   description:
-    "Estudiante de Análisis de Sistemas enfocado en solution engineering, integraciones API, despliegues cloud e implementación técnica.",
+    "Tech Lead y único ingeniero de Arai, la primera marca de Chromebook paraguaya. Estudiante de Análisis de Sistemas enfocado en cloud, integración de IA y producto.",
   summary:
-    "Software engineer con experiencia práctica construyendo APIs, desplegando servicios cloud, documentando soluciones técnicas y trabajando con stakeholders desde requerimientos hasta entrega. Me interesa traducir necesidades de negocio en implementaciones técnicas claras y ayudar a equipos a adoptar sistemas confiables.",
+    "Tech Lead y único ingeniero del equipo detrás de Arai, una marca de tecnología de SoftShop y la primera marca de Chromebook paraguaya. Construyo y mantengo la tienda, el tooling para desarrolladores y el material de enablement, y soy responsable del roadmap técnico de punta a punta: desde el trabajo con ChromeOS y la conectividad LTE hasta cómo se usan las funciones de IA en el dispositivo. Además diseño programas prácticos que ponen herramientas reales en manos de gente que nunca las usó; el más reciente llevó a ~400 estudiantes paraguayos de 14 a 17 años a una competencia de emprendimiento en vivo, cubierta por 5Días. Antes de Arai construí servicios en producción y sistemas RAG en SoftShop.",
   work: [
     {
       ...DATA.work[0],
-      title: "Ingeniero de Software",
+      title: "Tech Lead",
       description:
-        "Construí y mantuve servicios en producción con Python y Node.js para casos de uso internos y empresariales. Relevé requerimientos, diseñé APIs y modelos de datos, documenté detalles de implementación y desplegué servicios contenerizados en Google Cloud con CI/CD.",
+        "Lidero la tecnología de Arai, una marca de tecnología de SoftShop y la primera marca de Chromebook paraguaya, siendo el único ingeniero del equipo. Construyo y mantengo la tienda arai.la en sus distintos idiomas, y soy responsable del roadmap de la línea de dispositivos: conectividad LTE y aprovisionamiento de operador, y llevar funcionalidades de IA en la nube a los Chromebooks. También lidero el programa práctico de la marca para colegios y laboratorios, del que viene el trabajo del bootcamp.",
     },
     {
       ...DATA.work[1],
+      title: "Ingeniero de Software",
+      description:
+        "Construí y mantuve servicios en producción con Python y Node.js para casos de uso internos y empresariales. Relevé requerimientos, diseñé APIs y modelos de datos, documenté detalles de implementación y desplegué servicios contenerizados en Google Cloud con CI/CD. Di soporte técnico en preventa para productos de Google (GCP, Workspace, Ads), IBM y Arai.",
+    },
+    {
+      ...DATA.work[2],
       title: "Técnico de IT",
       description:
         "Empecé como pasante y luego fui contratado como técnico de IT. Apoyé operaciones de servidores, workflows, monitoreo y administración de bases de datos con DB2 y Postgres. Usé RHEL, Datadog, Bash e Instana para diagnosticar problemas y mantener sistemas confiables.",
@@ -69,6 +91,14 @@ export const DATA_ES = {
       ...project,
       ...projectTranslations[project.title as keyof typeof projectTranslations],
     })),
+  ],
+  highlights: [
+    {
+      ...DATA.highlights[0],
+      title: "Newsletter de Arai",
+      description:
+        "Creé y hoy escribo el newsletter de Arai, el canal hacia el público de una marca de Chromebook donde la mayoría del contenido técnico solo llegaría a revendedores y administradores.",
+    },
   ],
   moreInProgress: [
     {
