@@ -2,7 +2,7 @@ import { Icons } from "@/components/icons";
 import { DATA } from "./resume";
 
 const projectTranslations = {
-  "Bootcamp for schools — Team Arai": {
+  "Live entrepreneurship bootcamp — Team Arai": {
     description:
       "Diseñé y dicté un bootcamp de emprendimiento en vivo para ~400 estudiantes paraguayos de 14 a 17 años, ejecutado como competencia en tiempo real en lugar de una clase: los equipos definieron un producto, eligieron su público, construyeron una identidad de marca y publicaron un sitio web en unos 20 a 25 minutos mientras el auditorio votaba por código QR. Todo el formato se ensayó primero sobre una marca ficticia de pelotitas antiestrés: el juego en pixel art que abrió la sesión y atendió ~200 jugadores concurrentes, y la tienda 3D de abajo se construyeron para ella, junto con las guías de los laboratorios y las campañas digitales. Cubierto por 5Días.",
   },
@@ -45,27 +45,27 @@ const projectTranslations = {
 export const DATA_ES = {
   ...DATA,
   description:
-    "Tech Lead y único ingeniero de Arai, la primera marca de Chromebook paraguaya. Estudiante de Análisis de Sistemas enfocado en cloud, integración de IA y producto.",
+    "Ingeniero de Software e IA especializado en TI y productos de hardware, software y nube. Actualmente liderando la parte de TI en Arai, primera marca de Chromebook paraguaya. Certificado Google Cloud Professional Architect. Especializado en desarrollo de software y trabajos de IA con agentes y inferencia local.",
   summary:
-    "Tech Lead y único ingeniero del equipo detrás de Arai, una marca de tecnología de SoftShop y la primera marca de Chromebook paraguaya. Construyo y mantengo la tienda, el tooling para desarrolladores y el material de enablement, y soy responsable del roadmap técnico de punta a punta: desde el trabajo con ChromeOS y la conectividad LTE hasta cómo se usan las funciones de IA en el dispositivo. Además diseño programas prácticos que ponen herramientas reales en manos de gente que nunca las usó; el más reciente llevó a ~400 estudiantes paraguayos de 14 a 17 años a una competencia de emprendimiento en vivo, cubierta por 5Días. Antes de Arai construí servicios en producción y sistemas RAG en SoftShop.",
+    "Ingeniero de software especializado en TI y productos de hardware, software y nube. Actualmente liderando la parte de TI en Arai, una marca de tecnología de SoftShop y la primera marca de Chromebook paraguaya. Certificado Google Cloud Professional Architect. Especializado en desarrollo de software y trabajos de IA con agentes y inferencia local. Desarrollé y mantengo la tienda en arai.la como desarrollador único del proyecto, desde cero. Lidero el desarrollo de la línea de dispositivos: integración de IA en la nube y conectividad LTE. Diseño programas prácticos que ponen herramientas reales en manos de gente que nunca las usó; el más reciente llevó a ~400 estudiantes paraguayos de 14 a 17 años a una competencia de emprendimiento en vivo, cubierta por 5Días. Antes de Arai construí servicios en producción y sistemas de IA en SoftShop.",
   work: [
     {
       ...DATA.work[0],
-      title: "Tech Lead",
+      title: "Líder Técnico de Producto",
       description:
-        "Lidero la tecnología de Arai, una marca de tecnología de SoftShop y la primera marca de Chromebook paraguaya, siendo el único ingeniero del equipo. Construyo y mantengo la tienda arai.la en sus distintos idiomas, y soy responsable del roadmap de la línea de dispositivos: conectividad LTE y aprovisionamiento de operador, y llevar funcionalidades de IA en la nube a los Chromebooks. También lidero el programa práctico de la marca para colegios y laboratorios, del que viene el trabajo del bootcamp.",
+        "Marca de tecnología de SoftShop y primera marca de Chromebook paraguaya. Producto early-stage con foco en el segmento educativo (ed-tech). Desarrollé y mantengo la tienda en arai.la —catálogo, configuración de productos, carrito y checkout— como desarrollador full-stack del proyecto, desde cero. Lidero el desarrollo y tickets de la línea de dispositivos Arai: integración de IA en la nube dentro de los Chromebooks y conectividad LTE con aprovisionamiento de operador. Implemento restricciones de red, modo kiosk y virtualización de aplicaciones para entornos educativos, garantizando uso controlado y seguro de los dispositivos. Resuelvo problemas técnicos y busco alternativas de software optimizadas para hardware de bajo costo, maximizando la propuesta de valor en el segmento ed-tech.",
     },
     {
       ...DATA.work[1],
-      title: "Ingeniero de Software",
+      title: "Ingeniero de Software — Departamento de IA",
       description:
-        "Construí y mantuve servicios en producción con Python y Node.js para casos de uso internos y empresariales. Relevé requerimientos, diseñé APIs y modelos de datos, documenté detalles de implementación y desplegué servicios contenerizados en Google Cloud con CI/CD. Di soporte técnico en preventa para productos de Google (GCP, Workspace, Ads), IBM y Arai.",
+        "Desarrollo de servicios en producción con Python y Node.js para casos de uso internos y empresariales, sobre Google Cloud. Aceleró el ciclo de entrenamiento —armar estructura, probar, detectar errores y reentrenar— de 5 días a 1 día usando una estación local con 128 GB de RAM y RTX 5080. Desarrollo de microservicio para GTH (aplicación de SoftShop) en GCP creando un pipeline de clasificación de CVs y documentos con LLMs, ayudando a los reclutadores a filtrar candidatos y documentos de manera automatizada. Trabajo en sistemas de búsqueda agentica con skills y flujos repetitivos para herramienta interna de gestión de reportes para licitaciones asistiendo al equipo comercial en la identificación y análisis. Preventa y postventa técnica para productos de Google (GCP, Workspace, Enterprise), IBM y Arai, asistiendo en reuniones y conferencias.",
     },
     {
       ...DATA.work[2],
-      title: "Técnico de IT",
+      title: "Soporte Técnico",
       description:
-        "Empecé como pasante y luego fui contratado como técnico de IT. Apoyé operaciones de servidores, workflows, monitoreo y administración de bases de datos con DB2 y Postgres. Usé RHEL, Datadog, Bash e Instana para diagnosticar problemas y mantener sistemas confiables.",
+        "Gestión de bases de datos para clientes usando DB2, reduciendo el downtime de 8 horas a 3 horas una vez a la semana mediante estrategias Incremental y Delta. Instalación y mantenimiento de ambientes RHEL. Para datacenter interno con scripts para gestión de usuarios y servicios de red en VMs y contenedores. Monitorea y da soporte en la instalación de Virtual Machines para datacenter interno utilizando Instana y Datadog.",
     },
   ],
   education: [
@@ -92,14 +92,7 @@ export const DATA_ES = {
       ...projectTranslations[project.title as keyof typeof projectTranslations],
     })),
   ],
-  highlights: [
-    {
-      ...DATA.highlights[0],
-      title: "Newsletter de Arai",
-      description:
-        "Creé y hoy escribo el newsletter de Arai, el canal hacia el público de una marca de Chromebook donde la mayoría del contenido técnico solo llegaría a revendedores y administradores.",
-    },
-  ],
+
   moreInProgress: [
     {
       ...DATA.moreInProgress[0],

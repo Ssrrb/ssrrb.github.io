@@ -8,9 +8,9 @@ export const DATA = {
   location: "Asunción, PY",
   locationLink: "https://www.google.com/maps/place/asunci%C3%B3n,+paraguay/",
   description:
-    "Tech Lead and sole engineer for Arai, Paraguay's first Chromebook brand. Systems Analysis student focused on cloud, AI integration, and product engineering.",
+    "Software & AI Engineer specialising in IT and hardware, software and cloud products. Currently leading IT at Arai, Paraguay's first Chromebook brand. Google Cloud Professional Architect certified. Specialised in software development and AI work with agents and local inference.",
   summary:
-    "Tech Lead and the only engineer on the team behind Arai, a technology brand of SoftShop and Paraguay's first Chromebook brand. I build and maintain the storefront, the developer tooling and the enablement material, and I own the technical roadmap end to end — from ChromeOS and LTE connectivity work through to how AI features get used on the device. I also design hands-on programs that put real tools in front of people who have never used them; my most recent one put ~400 Paraguayan students aged 14 to 17 through a live entrepreneurship competition, and was covered by 5Días. Before Arai I built production services and RAG systems at SoftShop.",
+    "Software engineer specialising in IT and hardware, software and cloud products. Currently leading IT at Arai, a technology brand of SoftShop and Paraguay's first Chromebook brand. Google Cloud Professional Architect certified. Specialised in software development and AI work with agents and local inference. I build and maintain the arai.la storefront as the sole developer, lead the device line — cloud AI integration and LTE connectivity — and design hands-on programs that put real tools in front of people who have never used them; my most recent one put ~400 Paraguayan students aged 14 to 17 through a live entrepreneurship competition, covered by 5Días. Before Arai I built production services and AI systems at SoftShop.",
   avatarUrl: "/me.jpeg",
   skills: [
     "Technical Leadership",
@@ -80,36 +80,36 @@ export const DATA = {
       href: "https://arai.la/en",
       badges: ["SoftShop"],
       location: "Asunción, Paraguay",
-      title: "Tech Lead",
+      title: "Product Tech Lead",
       logoUrl: "/arai.png",
       start: "Jun 2026",
       end: "Current",
       description:
-        "Lead technology for Arai, a technology brand of SoftShop and Paraguay's first Chromebook brand, as the only engineer on the team. Build and maintain the arai.la storefront across locales, and own the roadmap for the device line: LTE connectivity and carrier provisioning, and bringing cloud AI features onto Chromebooks. Also lead the brand's hands-on programme for schools and labs, which is where the bootcamp work comes from.",
+        "A technology brand of SoftShop and Paraguay's first Chromebook brand. Early-stage product focused on the education segment (ed-tech). Developed and maintain the store at arai.la —catalogue, product configuration, cart and checkout— as the sole developer on the project, from scratch. Lead development and tickets for the Arai device line: cloud AI integration inside the Chromebooks and LTE connectivity with carrier provisioning. Implement network restrictions, kiosk mode and application virtualization for educational environments, ensuring controlled and secure device usage. Resolve technical issues and find software alternatives optimized for low-cost hardware, maximizing the value proposition in the ed-tech segment.",
     },
     {
       company: "SoftShop",
       href: "https://softshop.com.py",
       badges: [],
       location: "Asunción, Paraguay",
-      title: "Software Engineer",
+      title: "Software Engineer — AI Department",
       logoUrl: "/softshop.png",
       start: "Aug 2024",
       end: "May 2026",
       description:
-        "Built and maintained production services with Python and Node.js for internal and enterprise use cases. Collected requirements, designed APIs and data models, documented implementation details, and deployed containerized services on Google Cloud with CI/CD. Handled pre-sales technical support for Google (GCP, Workspace, Ads), IBM and Arai.",
+        "Development of production services in Python and Node.js for internal and enterprise use cases, on Google Cloud. Accelerated the training cycle —structure setup, testing, error detection and retraining— from 5 days to 1 day using a local workstation with 128 GB RAM and RTX 5080. Developed a microservice for GTH (SoftShop's application) on GCP, creating a CV and document classification pipeline with LLMs, helping recruiters filter candidates and documents automatically. Works on agentic search systems with skills and repetitive workflows for an internal report management tool for procurement, assisting the commercial team in identification and analysis. Technical pre-sales and post-sales for Google (GCP, Workspace, Enterprise), IBM and Arai products, supporting client meetings and conferences.",
     },
     {
       company: "Softshop",
       badges: [],
       href: "https://softshop.com.py",
       location: "Asunción, Paraguay",
-      title: "IT Technician",
+      title: "Technical Support",
       logoUrl: "/softshop.png",
       start: "Dec 2023",
-      end: "May 2024",
+      end: "Jul 2024",
       description:
-        "Started as an intern and was later hired as an IT technician. Supported server operations, workflows, monitoring, and database administration with DB2 and Postgres. Worked with RHEL, Datadog, Bash, and Instana to troubleshoot issues and keep systems reliable.",
+        "Database management for clients using DB2, reducing downtime from 8 hours to 3 hours once a week through Incremental and Delta strategies. Installation and maintenance of RHEL environments. For the internal datacenter with scripts for user management and network services on VMs and containers. Monitors and supports the installation of Virtual Machines for the internal datacenter using Instana and Datadog.",
     },
   ],
   education: [
@@ -148,7 +148,7 @@ export const DATA = {
   ],
   projects: [
     {
-      title: "Bootcamp for schools — Team Arai",
+      title: "Live entrepreneurship bootcamp — Team Arai",
       href: "https://5dias.com.py/article/cuando-la-creatividad-transforma-una-idea-en-un-desafo-emprendedor",
       dates: "Sep 2026",
       active: true,
@@ -388,17 +388,7 @@ export const DATA = {
         "",
     },
   ],
-  highlights: [
-    {
-      title: "Arai newsletter",
-      dates: "2026 - Present",
-      location: "Arai, Paraguay",
-      description:
-        "Created and now write the newsletter for Arai, the audience-facing channel for a Chromebook brand where most of the technical content would otherwise only reach resellers and admins.",
-      image: "/arai.png",
-      links: [],
-    },
-  ],
+
   moreInProgress: [
     {
       title: "Google Certified Educator Level 1",
