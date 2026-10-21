@@ -320,29 +320,6 @@ export const DATA = {
       video: "",
     },
     {
-      title: "Vida Farma",
-      href: "https://vida-farma-823216545609.us-central1.run.app",
-      dates: "Jul 2025 - Sep 2025",
-      active: true,
-      description:
-        "E-commerce demo for a pharmacy with a product catalog, purchase flow, and PostgreSQL-backed data model. Built the implementation from requirements to a deployed cloud demo.",
-      technologies: [
-        "Typescript",
-        "TailwindCSS",
-        "PostgreSQL",
-        "GCP",
-      ],
-      links: [
-        {
-          type: "Website",
-          href: "https://vida-farma-823216545609.us-central1.run.app",
-          icon: <Icons.globe className="size-3" />,
-        },
-      ],
-      image: "/vida-farm.webp",
-      video: "",
-    },
-    {
       title: "RAG ChatBot",
       href: "https://chat.softshop.com.py",
       dates: "Dec 2024 - Feb 2025",

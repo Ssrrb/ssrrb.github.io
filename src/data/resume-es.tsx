@@ -26,11 +26,6 @@ const projectTranslations = {
     description:
       "Desarrollé un sistema open source de citas médicas con reserva de turnos, búsqueda de doctores, filtros por seguro médico e integración con base de datos. Diseñé el flujo del servicio y desplegué la aplicación en Google Cloud.",
   },
-  "Vida Farma": {
-    dates: "Jul 2025 - Sep 2025",
-    description:
-      "Demo de e-commerce para una farmacia con catálogo de productos, flujo de compra y modelo de datos en PostgreSQL. Llevé la implementación desde requerimientos hasta una demo desplegada en la nube.",
-  },
   "RAG ChatBot": {
     description:
       "Construí un sistema RAG que permite crear agentes, cargar documentos internos y consultarlos en lenguaje natural. Integré GCP Vertex AI, AI SDK, Langchain, PostgreSQL y Milvus, con documentación de configuración y uso.",
