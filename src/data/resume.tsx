@@ -214,20 +214,32 @@ export const DATA = {
     },
     {
       title: "go-futbol",
-      href: "https://github.com/Ssrrb/go-futbol",
+      href: "https://www.gofutbol.me",
       dates: "2026",
       active: true,
       description:
         "Real-time player rankings for the Paraguayan Primera División, built from the official APF data feed.",
-      technologies: [],
+      technologies: [
+        "Go",
+        "HTMX",
+        "PostgreSQL",
+        "Google OAuth",
+        "Azure",
+        "Sentry",
+      ],
       links: [
         {
+          type: "Website",
+          href: "https://www.gofutbol.me",
+          icon: <Icons.globe className="size-3" />,
+        },
+        {
           type: "Source",
-          href: "https://github.com/Ssrrb/go-futbol",
+          href: "https://github.com/Ssrrb/go-football",
           icon: <Icons.github className="size-3" />,
         },
       ],
-      image: "",
+      image: "/gofutbol.webp",
       video: "",
     },
     {
@@ -329,36 +341,6 @@ export const DATA = {
       ],
       image: "/vida-farm.webp",
       video: "",
-    },
-    {
-      title: "Mariscal Estigarribia",
-      href: "https://mcalestigarribia.edu.py",
-      dates: "July 2025 -  September 2025",
-      active: true,
-      description:
-        "Developed and delivered the website for a national school. Coordinated requirements with school administrators, managed the domain setup, and handled the production launch.",
-      technologies: [
-        "React",
-        "Typescript",
-        "TailwindCSS",
-        "Shadcn UI",
-        "Magic UI",
-      ],
-      links: [
-        {
-          type: "Website",
-          href: "https://mcalestigarribiacarapegua.edu.py",
-          icon: <Icons.globe className="size-3" />,
-        },
-        {
-          type: "Source",
-          href: "https://github.com/Ssrrb/mcal-estigarribia",
-          icon: <Icons.github className="size-3" />,
-        },
-      ],
-      image: "/mcal.webp",
-      video:
-        "",
     },
     {
       title: "RAG ChatBot",
