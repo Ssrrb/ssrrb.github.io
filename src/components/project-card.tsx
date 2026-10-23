@@ -1,3 +1,4 @@
+import { ProjectVideo } from "@/components/project-video";
 import { Badge } from "@/components/ui/badge";
 import {
   Card,
@@ -51,15 +52,7 @@ export function ProjectCard({
         className={cn("block cursor-pointer", className)}
       >
         {video ? (
-          <video
-            src={video}
-            poster={image}
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="pointer-events-none mx-auto h-40 w-full object-cover object-top" // needed because random black line at bottom of video
-          />
+          <ProjectVideo src={video} poster={image} title={title} />
         ) : image ? (
           <Image
             src={image}
