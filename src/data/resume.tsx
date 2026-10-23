@@ -148,6 +148,31 @@ export const DATA = {
   ],
   projects: [
     {
+      title: "Gafitas",
+      href: "https://github.com/Ssrrb/gafitas",
+      dates: "Oct 2026 - Present",
+      active: true,
+      description:
+        "A Mac UI harness for small models. It finds the code that answers your question on-device with EmbeddingGemma, then has a coding agent draw an interactive figure of how it fits together, tied to the real lines. Gafitas ships the drawings, so a small local model can explain as clearly as a frontier one.",
+      technologies: [
+        "Swift",
+        "macOS",
+        "llama.cpp",
+        "EmbeddingGemma",
+        "Pi",
+        "OpenUI",
+      ],
+      links: [
+        {
+          type: "Source",
+          href: "https://github.com/Ssrrb/gafitas",
+          icon: <Icons.github className="size-3" />,
+        },
+      ],
+      image: "/gafitas-demo.jpg",
+      video: "/gafitas-demo.mp4",
+    },
+    {
       title: "Live entrepreneurship bootcamp — Team Arai",
       href: "https://5dias.com.py/article/cuando-la-creatividad-transforma-una-idea-en-un-desafo-emprendedor",
       dates: "Sep 2026",

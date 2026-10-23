@@ -2,6 +2,11 @@ import { Icons } from "@/components/icons";
 import { DATA } from "./resume";
 
 const projectTranslations = {
+  Gafitas: {
+    dates: "Oct 2026 - Presente",
+    description:
+      "Un harness de UI para modelos chicos en Mac. Busca en tu código la respuesta a tu pregunta con EmbeddingGemma en el dispositivo y luego hace que un agente de código dibuje una figura interactiva de cómo encaja, ligada a las líneas reales. Gafitas incluye los dibujos, así un modelo local chico explica tan claro como uno de frontera.",
+  },
   "Live entrepreneurship bootcamp — Team Arai": {
     description:
       "Diseñé y dicté un bootcamp de emprendimiento en vivo para ~400 estudiantes paraguayos de 14 a 17 años, ejecutado como competencia en tiempo real en lugar de una clase: los equipos definieron un producto, eligieron su público, construyeron una identidad de marca y publicaron un sitio web en unos 20 a 25 minutos mientras el auditorio votaba por código QR. Todo el formato se ensayó primero sobre una marca ficticia de pelotitas antiestrés: el juego en pixel art que abrió la sesión y atendió ~200 jugadores concurrentes, y la tienda 3D de abajo se construyeron para ella, junto con las guías de los laboratorios y las campañas digitales. Cubierto por 5Días.",
