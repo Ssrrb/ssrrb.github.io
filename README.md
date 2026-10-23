@@ -1,7 +1,3 @@
-<div align="center">
-  <img alt="Sebastián Rojas" src="./public/me.webp" width="120" />
-</div>
-
 # ssrrb.github.io
 
 My personal portfolio and CV, live at [ssrrb.github.io](https://ssrrb.github.io).
