@@ -1,46 +1,59 @@
 <div align="center">
-<img alt="Portfolio" src="https://github.com/dillionverma/portfolio/assets/16860528/57ffca81-3f0a-4425-b31d-094f61725455" width="90%">
+  <img alt="Sebastián Rojas" src="./public/me.webp" width="120" />
 </div>
 
-# Portfolio 
-Built with next.js, [shadcn/ui](https://ui.shadcn.com/), and [magic ui](https://magicui.design/), deployed on Vercel.
+# sebastianrojas.lat
+
+My personal portfolio and CV, live at [sebastianrojas.lat](https://sebastianrojas.lat).
+
+Bilingual (English / Spanish) site built with Next.js, React, TypeScript, Tailwind CSS, [shadcn/ui](https://ui.shadcn.com/) and [Magic UI](https://magicui.design/), statically exported and deployed to GitHub Pages.
 
 # Features
 
-- Setup only takes a few minutes by editing the [single config file](./src/data/resume.tsx)
-- Built using Next.js 14, React, Typescript, Shadcn/UI, TailwindCSS, Framer Motion, Magic UI
-- Includes a blog
-- Responsive for different devices
-- Optimized for Next.js and Vercel
+- Editable résumé content in a single place: [`src/data/resume.tsx`](./src/data/resume.tsx) (English) and [`src/data/resume-es.tsx`](./src/data/resume-es.tsx) (Spanish)
+- English and Spanish routes with `next-intl` and a language toggle
+- Work experience, education, skills, projects and a blog
+- Light/dark theme
+- Responsive, with a static export for GitHub Pages
 
 # Getting Started Locally
 
-1. Clone this repository to your local machine:
+1. Clone the repository:
 
    ```bash
-   git clone https://github.com/dillionverma/portfolio
+   git clone https://github.com/Ssrrb/ssrrb.github.io
    ```
 
-2. Move to the cloned directory
+2. Move into it and install dependencies:
 
    ```bash
-   cd portfolio
-   ```
-
-3. Install dependencies:
-
-   ```bash
+   cd ssrrb.github.io
    pnpm install
    ```
 
-4. Start the local Server:
+3. Start the development server:
 
    ```bash
    pnpm dev
    ```
 
-5. Open the [Config file](./src/data/resume.tsx) and make changes
+4. Open [http://127.0.0.1:3000](http://127.0.0.1:3000).
+
+5. Edit your content in `src/data/resume.tsx` and `src/data/resume-es.tsx`.
+
+# Scripts
+
+| Command       | Description                              |
+| ------------- | ---------------------------------------- |
+| `pnpm dev`    | Start the local dev server               |
+| `pnpm build`  | Build the static site into `out/`        |
+| `pnpm lint`   | Run ESLint                               |
+| `pnpm start`  | Serve the production build               |
+
+# Deployment
+
+Pushes to `main` trigger [`.github/workflows/nextjs.yml`](./.github/workflows/nextjs.yml), which builds the site, runs [`scripts/postbuild.sh`](./scripts/postbuild.sh) to add the `CNAME` file, and deploys `out/` to GitHub Pages.
 
 # License
 
-Licensed under the [MIT license](https://github.com/dillionverma/portfolio/blob/main/LICENSE.md).
+Licensed under the [MIT license](https://github.com/dillionverma/portfolio/blob/main/LICENSE.md). Originally based on [dillionverma/portfolio](https://github.com/dillionverma/portfolio).
