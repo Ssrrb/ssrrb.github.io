@@ -2,9 +2,9 @@
   <img alt="Sebastián Rojas" src="./public/me.webp" width="120" />
 </div>
 
-# sebastianrojas.lat
+# ssrrb.github.io
 
-My personal portfolio and CV, live at [sebastianrojas.lat](https://sebastianrojas.lat).
+My personal portfolio and CV, live at [ssrrb.github.io](https://ssrrb.github.io).
 
 Bilingual (English / Spanish) site built with Next.js, React, TypeScript, Tailwind CSS, [shadcn/ui](https://ui.shadcn.com/) and [Magic UI](https://magicui.design/), statically exported and deployed to GitHub Pages.
 
@@ -48,11 +48,10 @@ Bilingual (English / Spanish) site built with Next.js, React, TypeScript, Tailwi
 | `pnpm dev`    | Start the local dev server               |
 | `pnpm build`  | Build the static site into `out/`        |
 | `pnpm lint`   | Run ESLint                               |
-| `pnpm start`  | Serve the production build               |
 
 # Deployment
 
-Pushes to `main` trigger [`.github/workflows/nextjs.yml`](./.github/workflows/nextjs.yml), which builds the site, runs [`scripts/postbuild.sh`](./scripts/postbuild.sh) to add the `CNAME` file, and deploys `out/` to GitHub Pages.
+Pushes to `main` trigger [`.github/workflows/nextjs.yml`](./.github/workflows/nextjs.yml), which builds the site and deploys `out/` to GitHub Pages at [ssrrb.github.io](https://ssrrb.github.io).
 
 # License
 

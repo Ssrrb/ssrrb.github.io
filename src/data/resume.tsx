@@ -4,7 +4,7 @@ import { HomeIcon, NotebookIcon } from "lucide-react";
 export const DATA = {
   name: "Sebastián Rojas",
   initials: "SR",
-  url: "https://sebastianrojas.lat",
+  url: "https://ssrrb.github.io",
   location: "Asunción, PY",
   locationLink: "https://www.google.com/maps/place/asunci%C3%B3n,+paraguay/",
   description:
