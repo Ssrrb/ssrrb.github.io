@@ -5,6 +5,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import { setRequestLocale } from "next-intl/server";
+import { PostVideos } from "@/components/post-videos";
 
 export async function generateStaticParams() {
   const posts = await getBlogPosts();
@@ -114,6 +115,7 @@ export default async function Blog({
         className="prose dark:prose-invert"
         dangerouslySetInnerHTML={{ __html: post.source }}
       ></article>
+      <PostVideos />
     </section>
   );
 }

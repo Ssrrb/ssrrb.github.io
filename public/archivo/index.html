@@ -292,7 +292,7 @@ footer{border-top:1px solid var(--rule);padding:28px 0 0;font-size:.85rem;color:
 const BASE = new URL('.', location.href).href;
 const ABS = 'https://ssrrb.github.io/archivo';
 const TYPES = {acta:'Acta',adenda:'Adenda',contrato:'Contrato',dictamen:'Dictamen',informe:'Informe',nota:'Nota',poliza:'Póliza',resolucion:'Resolución',plano:'Plano',documento:'Documento'};
-const EXAMPLES = ['prórroga del plazo por lluvias','sección transversal típica','protección con gaviones','refugio para dársenas','acta de apertura de ofertas','resolución de adjudicación','Benito Roggio','orden de inicio de obra','descalifica al oferente','Itapúa caminos vecinales','póliza de fiel cumplimiento'];
+const EXAMPLES = ['quién ganó la licitación','protección con gaviones','parada de ómnibus con techo en dársena','evaluación de la situación financiera de los oferentes','prórroga del plazo por lluvias','acta de apertura de ofertas','garantía bancaria del contratista','Benito Roggio'];
 const $ = s => document.querySelector(s);
 const col = t => `var(--t-${t || 'documento'})`;
 const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -303,7 +303,7 @@ const stem = w => w.length > 4 ? w.replace(/(es|s)$/, '') : w;
 const STOP = new Set('de la el los las del en y a que por con para un una se al o su lo es como mas sus fue son este esta'.split(' '));
 const words = s => (foldc(s).match(/[a-z0-9]+/g) || []).filter(w => !STOP.has(w)).map(stem);
 
-let INDEX, CORPUS, OBRAS, STATS, bm, state = {q:'', tipo:null, obra:null, shown:12};
+let INDEX, CORPUS, OBRAS, STATS, bm, VEC = null, state = {q:'', tipo:null, obra:null, shown:12};
 
 function BM25(texts){
   const tf = texts.map(t => { const m = new Map(); for (const w of words(t)) m.set(w, (m.get(w)||0)+1); return m; });
@@ -394,17 +394,32 @@ function chips(){
   $('#examples').querySelectorAll('button').forEach(b => b.onclick = () => { $('#q').value = b.textContent; state.q = b.textContent; state.shown = 12; render(); $('#q').focus(); });
 }
 
+const normq = s => foldc(s.trim()).replace(/[^a-z0-9]+/g, ' ').trim();
+const dot = (a, b) => { let s = 0; for (let i = 0; i < a.length; i++) s += a[i] * b[i]; return s; };
+function rrf(key, sem){
+  // Reciprocal rank fusion; semantic ranks count only for the 12 closest documents.
+  const out = new Array(sem.length).fill(0), k = 60;
+  const rank = arr => arr.map((v, i) => [v, i]).filter(x => x[0] > 0).sort((a, b) => b[0] - a[0]).map(x => x[1]);
+  if (key) rank(key).forEach((i, r) => out[i] += 1 / (k + r + 1));
+  rank(sem).slice(0, 12).forEach((i, r) => out[i] += 1 / (k + r + 1));
+  return out;
+}
+function unpack(b64){ const bin = atob(b64), v = new Float32Array(bin.length); for (let i = 0; i < bin.length; i++) v[i] = ((bin.charCodeAt(i) << 24) >> 24) / 127; return v; }
+
 function render(){
   document.querySelectorAll('[data-tipo]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.tipo === state.tipo)));
   document.querySelectorAll('[data-obra]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.obra === state.obra)));
   const q = words(state.q), t0 = performance.now();
-  const scores = q.length ? bm(q) : null;
+  let scores = q.length ? bm(q) : null;
+  // Meaning: example questions were embedded ahead of time by the same local model as the documents.
+  const qv = VEC && VEC.q[normq(state.q)];
+  if (qv) scores = rrf(scores, VEC.docs.map(v => dot(v, qv)));
   let list = INDEX.documentos.map((d, i) => ({d, s: scores ? scores[i] : 0, text: CORPUS[i].texto}))
     .filter(x => (!state.tipo || x.d.tipo === state.tipo) && (!state.obra || x.d.llamado === state.obra) && (!scores || x.s > 0));
   if (scores) list.sort((a,b) => b.s - a.s);
   const ms = performance.now() - t0;
   $('#count').textContent = q.length
-    ? `${list.length} documentos en ${ms < 1 ? '<1' : Math.round(ms)} ms, entre ${fmt(STATS.paginas)} páginas`
+    ? `${list.length} documentos en ${ms < 1 ? '<1' : Math.round(ms)} ms, entre ${fmt(STATS.paginas)} hojas${qv ? ' · por significado y por palabras' : ''}`
     : `${list.length} documentos`;
   $('#results').innerHTML = list.slice(0, state.shown).map(({d, text}) => {
     const c = d.campos, facts = [c.titulo && `<span><b>${esc(c.titulo)}</b></span>`, c.lamina && `<span>lámina <b>${esc(c.lamina)}</b></span>`, c.escala && `<span>esc. <b>${esc(c.escala)}</b></span>`, c.fecha && `<span><b>${c.fecha.split('-').reverse().join('/')}</b></span>`,
@@ -525,10 +540,14 @@ async function boot(){
   bars($('#byObra'), OBRAS.map(o => [o.llamado, o.paginas, o.titulo]).sort((a,b) => b[1]-a[1]), () => 'var(--accent)');
   CORPUS = (await j('api/v1/corpus.json')).documentos;
   bm = BM25(CORPUS.map((d, i) => `${INDEX.documentos[i].tipo_label} ${d.empresa || ''} ${d.texto}`));
+  try {
+    const v = await j('api/v1/vectors.json');
+    VEC = {docs: CORPUS.map(d => unpack(v.documentos[d.id])), q: Object.fromEntries(Object.entries(v.consultas).map(([k, b]) => [normq(k), unpack(b)]))};
+  } catch (e) { VEC = null; }
   chips(); render();
   const params = new URLSearchParams(location.search);
   if (params.get('q')) { $('#q').value = state.q = params.get('q'); render(); }
-  onVisible($('#pila'), () => setTimeout(() => { if (!sorted) sortPile(); }, 600));
+  if (!params.has('quieto')) onVisible($('#pila'), () => setTimeout(() => { if (!sorted) sortPile(); }, 600));
 }
 $('#sortBtn').onclick = sortPile;
 $('#sform').onsubmit = e => { e.preventDefault(); state.q = $('#q').value; state.shown = 12; render(); };

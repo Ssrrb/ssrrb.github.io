@@ -26,7 +26,11 @@ Miles de expedientes en papel, apilados. Encontrar uno es buscarlo a mano, hoja 
 
 Se escanean los papeles y una inteligencia artificial los lee. Después, cualquier funcionario escribe lo que busca con sus propias palabras, como se lo pediría a un colega, y la hoja aparece en segundos.
 
-Para ordenar las hojas entrené un modelo propio, pequeño y especializado en reconocer el tipo de cada una y dónde termina cada documento. Ser pequeño es lo que le permite correr dentro de una computadora y no enviar los documentos a internet. Un expediente de la Municipalidad se queda en la Municipalidad.
+<video src="/blog/archivo-buscable/significado.mp4" poster="/blog/archivo-buscable/significado.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Se escribe quién ganó la licitación y aparecen las resoluciones de adjudicación" style="width:100%;border-radius:12px"></video>
+
+_"Quién ganó la licitación" encuentra las resoluciones de adjudicación, aunque ninguna diga "ganó"._
+
+Para ordenar las hojas armé un clasificador propio, pequeño y especializado en reconocer el tipo de cada una y dónde termina cada documento. Todo es lo bastante liviano para correr dentro de una computadora, sin enviar los documentos a internet. Un expediente de la Municipalidad se queda en la Municipalidad.
 
 ## La prueba
 
@@ -36,11 +40,11 @@ Para demostrarlo se usaron los documentos de 16 obras del MOPC, escaneados y pub
 
 Entraron 390 hojas mezcladas, como salen del escáner. La IA las leyó, marcó dónde termina un documento y empieza el siguiente, y las agrupó en 134 documentos: actas, adendas, resoluciones, contratos, notas y planos.
 
-![Cada cuadrado es una hoja escaneada, antes de ser leída y ordenada](/blog/archivo-buscable/pila.webp)
+<video src="/blog/archivo-buscable/pila.mp4" poster="/blog/archivo-buscable/pila.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Cada cuadrado es una hoja escaneada; al leerlas se colorean por tipo y se agrupan en documentos" style="width:100%;border-radius:12px"></video>
 
 Con todo ordenado, se puede preguntar. Los planos también se buscan, aunque un plano escaneado sea solo una imagen. Escribir "protección con gaviones" devuelve la lámina exacta, con su escala y número.
 
-![Resultados de una búsqueda: cada documento con su tipo, su fecha y el número de llamado](/blog/archivo-buscable/planos.webp)
+<video src="/blog/archivo-buscable/gaviones.mp4" poster="/blog/archivo-buscable/gaviones.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Se busca protección con gaviones y aparece la lámina del plano con su escala y número" style="width:100%;border-radius:12px"></video>
 
 Para saber si se puede confiar, se comparó cada resultado con los datos oficiales de la DNCP:
 
@@ -50,14 +54,18 @@ Para saber si se puede confiar, se comparó cada resultado con los datos oficial
 - **94%** de las hojas quedaron con su tipo correcto: contrato, acta, resolución, nota o plano.
 - **93%** de los cortes entre un documento y el siguiente cayeron donde correspondía.
 
+Los tipos y los cortes se midieron con 6 obras que el sistema nunca vio al prepararse.
+
 Cada resultado muestra la hoja original, así que cualquier dato se verifica con el papel a la vista.
+
+<video src="/blog/archivo-buscable/original.mp4" poster="/blog/archivo-buscable/original.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Se abre un documento: la hoja escaneada, sus datos y el enlace al PDF original en la DNCP" style="width:100%;border-radius:12px"></video>
 
 ## Detalles técnicos
 
 Para quien quiera saber cómo funciona por dentro:
 
 - **Lectura:** técnicas de OCR convierten cada hoja escaneada en texto, planos incluidos.
-- **Clasificación:** un modelo de 1.7B de parámetros (LFM3), entrenado con LoRA para esta tarea, reconoce el tipo de cada hoja y los cortes entre documentos. Del entrenamiento solo se usaron unas pocas hojas, como ejemplo del formato.
+- **Clasificación:** las señales que usaría un archivista (título, número de página, número de llamado, firmas) se combinan en un modelo estadístico pequeño que decide el tipo de cada hoja y dónde empieza cada documento. Se ajustó con otras 10 obras; las 6 de la prueba quedaron afuera.
 - **Búsqueda:** un modelo de embeddings representa cada texto por su significado, y por eso una consulta encuentra documentos que no repiten sus palabras.
 
 ## Probarlo con el archivo de la Municipalidad
