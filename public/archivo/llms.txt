@@ -1,0 +1,48 @@
+# Archivo buscable de expedientes de obra pública
+
+> 390 páginas escaneadas de 16 obras públicas del MOPC (Paraguay), leídas por una IA local (Unlimited-OCR 2), separadas en 134 documentos, clasificadas por tipo y con fecha, llamado, empresa y montos extraídos. API JSON estática, de solo lectura, sin clave.
+
+Datos: CC BY 4.0, Dirección Nacional de Contrataciones Públicas (DNCP), Paraguay. Citá la fuente original (campo `original.url` de cada documento).
+
+## Cómo usarla
+
+- Para responder una pregunta, bajá https://ssrrb.github.io/archivo/api/v1/corpus.json (todo el texto, un archivo) y buscá ahí; después pedí el documento completo para citarlo.
+- Para listar o filtrar sin leer texto, usá https://ssrrb.github.io/archivo/api/v1/index.json (tipo, obra, fecha, empresa, monto por documento).
+- Cada documento tiene un enlace al PDF original en contrataciones.gov.py: citalo junto con el id.
+- Los campos se extrajeron automáticamente del texto: si un campo falta, buscalo en `texto`.
+- Los planos (tipo `plano`) también están leídos: rótulo, títulos, cotas, progresivas y notas de cada lámina son texto buscable.
+
+## Endpoints
+
+- [Estadísticas](https://ssrrb.github.io/archivo/api/v1/stats.json): totales y calidad medida en una prueba a ciegas
+- [Catálogo](https://ssrrb.github.io/archivo/api/v1/index.json): un resumen por documento
+- [Corpus](https://ssrrb.github.io/archivo/api/v1/corpus.json): texto completo de todos los documentos
+- [Documento](https://ssrrb.github.io/archivo/api/v1/docs/doc-001.json): `/api/v1/docs/{id}.json`, texto por página e imágenes
+- [Obras](https://ssrrb.github.io/archivo/api/v1/obras.json): `/api/v1/obras/{llamado}.json` para una sola
+- [Por tipo](https://ssrrb.github.io/archivo/api/v1/tipos/adenda.json): `/api/v1/tipos/{tipo}.json`, tipos: acta, adenda, contrato, dictamen, informe, nota, plano, resolucion
+- [OpenAPI](https://ssrrb.github.io/archivo/openapi.json): esquema completo
+- [Texto completo para LLM](https://ssrrb.github.io/archivo/llms-full.txt): todo el archivo en Markdown
+
+## Obras
+
+- [325780](https://ssrrb.github.io/archivo/api/v1/obras/325780.json): UEP-MOPC Nº 21/2017. OBRAS DE REHABILITACION Y MANTENIMIENTO POR NIVELES DE SERVICIO GMANS RUTAS PY05 Y PY03, 135,7 KM. TRAMOS: a) PY05: YBY (8 documentos)
+- [325783](https://ssrrb.github.io/archivo/api/v1/obras/325783.json): Infraestructura para Sistemas de Recolección y Tratamiento de Aguas Residuales y Mejoramiento de los Sistemas de Agua Potable para Ciudades  (12 documentos)
+- [334139](https://ssrrb.github.io/archivo/api/v1/obras/334139.json): OBRAS DE REHABILITACION Y MANTENIMIENTO POR NIVELES DE SERVICIO (C.R.E.M.A.) RUTA NACIONAL N° 09, TRAMO: MARISCAL ESTIGARRIBIA – LA PATRIA ( (7 documentos)
+- [351364](https://ssrrb.github.io/archivo/api/v1/obras/351364.json): REHABILITACIÓN DE CAMINOS VECINALES EN EL DEPARTAMENTO DE ITAPÚA. PROGRAMA PR-L-1092 - GRUPO 1.1 (14 documentos)
+- [351398](https://ssrrb.github.io/archivo/api/v1/obras/351398.json): REHABILITACIÓN DE CAMINOS VECINALES EN LOS DEPARTAMENTOS DE ALTO PARANA Y CORDILLERA PROGRAMA PR - L-1092 -GRUPO 1.2- AD REFERÉNDUM AL PGN 2 (14 documentos)
+- [354337](https://ssrrb.github.io/archivo/api/v1/obras/354337.json): EMPRESAS CONSTRUCTORAS PARA OBRAS DE MEJORAMIENTO, REHABILITACION Y POSTERIOR MANTENIMIENTO DEL TRAMO ÑUMI - SAN JUAN NEPOMUCENO - EMPALME C (5 documentos)
+- [359641](https://ssrrb.github.io/archivo/api/v1/obras/359641.json): LLAMADO MOPC N° 14/2020 LICITACIÓN PÚBLICA INTERNACIONAL DE EMPRESAS CONSTRUCTORAS PARA LA REHABILITACIÓN Y DUPLICACIÓN DEL TRAMO REMANSO RU (8 documentos)
+- [366300](https://ssrrb.github.io/archivo/api/v1/obras/366300.json): LLAMADO MOPC Nº 113/2019 LICITACIÓN PÚBLICA NACIONAL AD REFERENDUM A LA REPROGRAMACIÓN PRESUPUESTARIA CONTRATACIÓN DE EMPRESAS CONSTRUCTORAS (6 documentos)
+- [370320](https://ssrrb.github.io/archivo/api/v1/obras/370320.json): LPI EMPRESAS CONSTRUCTORAS PARA OBRAS DE HABILITACIÓN Y MANTENIMIENTO DE LA RUTA N°9 Y ACCESOS, TRAMO 4: LOTE 7. AD REFERÉNDUM AL PGN 2020 (6 documentos)
+- [382545](https://ssrrb.github.io/archivo/api/v1/obras/382545.json): LLAMADO UEP MOPC N° 46/2020 LICITACIÓN PÚBLICA INTERNACIONAL DE EMPRESAS CONSTRUCTORAS PARA OBRAS DE HABILITACIÓN Y MANTENIMIENTO DE LA RUTA (3 documentos)
+- [388869](https://ssrrb.github.io/archivo/api/v1/obras/388869.json): LLAMADO MOPC N° 109/2020 LICITACIÓN PÚBLICA INTERNACIONAL PARA LA CONTRATACIÓN DE EMPRESAS CONSTRUCTORAS PARA LOS ACCESOS AL 2° PUENTE SOBRE (4 documentos)
+- [398706](https://ssrrb.github.io/archivo/api/v1/obras/398706.json): LLAMADO MOPC N° 44/2021 LICITACIÓN PÚBLICA INTERNACIONAL PARA LAS OBRAS DE CONSTRUCCIÓN DE TRAMOS DE CAMINOS VECINALES EN LOS DEPARTAMENTOS  (8 documentos)
+- [400854](https://ssrrb.github.io/archivo/api/v1/obras/400854.json): LLAMADO MOPC Nº 69/2021 LICICTACIÓN PÚBLICA INTERNACIONAL PARA LA CONSTRUCCIÓN DE PUENTES DE HORMIGÓN ARMADO EN VARIOS DEPARTAMENTOS DE LA R (9 documentos)
+- [402400](https://ssrrb.github.io/archivo/api/v1/obras/402400.json): LLAMADO MOPC N°92/2021 LICITACION PUBLICA INTERNACIONAL PARA LA CONTRATACION DE FIRMAS CONSTRUCTORAS PARA EL MEJORAMIENTO Y REHABILITACIÓN D (2 documentos)
+- [435069](https://ssrrb.github.io/archivo/api/v1/obras/435069.json): LLAMADO MOPC Nº 52/2023 LICITACIÓN PÚBLICA NACIONAL PARA LAS OBRAS DE EJECUCIÓN DE PLANES URBANOS MALLA NORTE. CON ID Nº 435.069 (7 documentos)
+- [454970](https://ssrrb.github.io/archivo/api/v1/obras/454970.json): LLAMADO MOPC N° 123/2024 LICITACIÓN PÚBLICA NACIONAL  PARA REHABILITACIÓN Y PAVIMENTACIÓN ASFÁLTICA DE TRAMOS CAMINEROS EN LOS DEPARTAMENTOS (21 documentos)
+
+## Optional
+
+- [Demo interactiva](https://ssrrb.github.io/archivo/): buscador con las páginas escaneadas
+- [Servidor MCP](https://github.com/ssrrb/digitalizar-archivos/tree/main/api): herramientas `buscar` y `leer_documento` sobre esta API
