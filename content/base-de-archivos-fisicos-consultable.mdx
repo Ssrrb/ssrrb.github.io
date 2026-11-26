@@ -24,13 +24,11 @@ Miles de expedientes en papel, apilados. Encontrar uno es buscarlo a mano, hoja 
 
 ## La solución
 
-Se escanean los papeles y una inteligencia artificial los lee. Después, cualquier funcionario escribe lo que busca con sus propias palabras, como se lo pediría a un colega, y la hoja aparece en segundos.
+Un funcionario escribe "quién ganó la licitación" y en segundos aparecen las resoluciones de adjudicación. Ninguna dice "ganó".
 
-<video src="/blog/archivo-buscable/significado.mp4" poster="/blog/archivo-buscable/significado.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Se escribe quién ganó la licitación y aparecen las resoluciones de adjudicación" style="width:100%;border-radius:12px"></video>
+Se escanean los papeles y una inteligencia artificial los lee. Después se pregunta con las propias palabras, como se lo pediría a un colega, sin saber el número ni el título del expediente.
 
-_"Quién ganó la licitación" encuentra las resoluciones de adjudicación, aunque ninguna diga "ganó"._
-
-Para ordenar las hojas armé un clasificador propio, pequeño y especializado en reconocer el tipo de cada una y dónde termina cada documento. Todo es lo bastante liviano para correr dentro de una computadora, sin enviar los documentos a internet. Un expediente de la Municipalidad se queda en la Municipalidad.
+Todo es lo bastante liviano para correr dentro de una computadora, sin enviar los documentos a internet. Un expediente de la Municipalidad se queda en la Municipalidad.
 
 ## La prueba
 
@@ -68,10 +66,10 @@ Para quien quiera saber cómo funciona por dentro:
 - **Clasificación:** las señales que usaría un archivista (título, número de página, número de llamado, firmas) se combinan en un modelo estadístico pequeño que decide el tipo de cada hoja y dónde empieza cada documento. Se ajustó con otras 10 obras; las 6 de la prueba quedaron afuera.
 - **Búsqueda:** un modelo de embeddings representa cada texto por su significado, y por eso una consulta encuentra documentos que no repiten sus palabras.
 
-## Probarlo con el archivo de la Municipalidad
+## Y el archivo completo de la Municipalidad
 
-Lo desarrollé yo y lo implemento. La propuesta es una prueba con una parte del archivo que la Municipalidad elija, medida igual que esta: cuántos números, tipos y cortes salen bien.
+Si yo digitalizara el archivo, estimo una base consultable de alrededor de 1 millón de documentos en 14 meses. Hacen falta 3 personas trabajando 4 horas por día y un escáner de 40 páginas por minuto. El equipamiento (el escáner, más una Mac mini con almacenamiento y respaldo para la inteligencia artificial) costaría alrededor de US$4.500.
 
-Para coordinarla, escribir a [sirsebastianrojas@gmail.com](mailto:sirsebastianrojas@gmail.com).
+Lo desarrollé yo y lo implemento yo. Para conversar el alcance, escribime a [sirsebastianrojas@gmail.com](mailto:sirsebastianrojas@gmail.com).
 
 _Documentos: DNCP Paraguay, [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)._
