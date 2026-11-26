@@ -1,0 +1,45 @@
+---
+title: "Una pila de papel que responde preguntas"
+publishedAt: "2026-11-26"
+summary: "366 páginas escaneadas de obra pública, leídas por un modelo de 1.7B en una sola computadora y abiertas como API para personas y agentes."
+image: "/blog/archivo-buscable/hero.webp"
+---
+
+Un PDF escaneado es una foto. La computadora no sabe qué dice, de qué obra es ni quién lo firmó. Los archivos públicos están llenos de eso.
+
+Agarré 366 páginas escaneadas de 16 obras del MOPC, públicas en la [DNCP](https://www.contrataciones.gov.py/). Las mezclé en una sola pila, como salen de un escáner. Sin texto, sin separadores.
+
+![La pila: cada cuadrado es una hoja, el color es el tipo de documento que encontró la IA](/blog/archivo-buscable/pila.webp)
+
+[Unlimited-OCR 2](https://huggingface.co/baidu/Unlimited-OCR-2), un modelo de 1.7B que corre local, lee cada hoja. Un separador chico decide dónde empieza cada documento. Salen 110 documentos, cada uno con tipo, fecha, llamado, empresa y montos.
+
+---
+
+Medido a ciegas contra el portal oficial: **97%** de números de llamado iguales, **94%** de páginas con el tipo correcto, **93%** de F1 en los cortes entre documentos.
+
+![Calidad medida contra la DNCP](/blog/archivo-buscable/calidad.webp)
+
+Buscás como hablás. "Prórroga del plazo por lluvias" y aparecen las adendas, con la hoja escaneada al lado del texto y el enlace al PDF original.
+
+![Buscar y abrir un documento](/blog/archivo-buscable/buscar.webp)
+
+---
+
+Lo que más me importa: el archivo también lo lee una IA. Es una API JSON estática, sin clave, con [`llms.txt`](/archivo/llms.txt), [OpenAPI](/archivo/openapi.json) y un [servidor MCP](https://github.com/ssrrb/digitalizar-archivos/tree/main/api) de un archivo.
+
+![La API respondiendo desde la demo](/blog/archivo-buscable/api.webp)
+
+Pegale esto a cualquier asistente con web:
+
+```text
+Leé https://ssrrb.github.io/archivo/llms.txt y decime qué adendas
+prorrogaron plazos de obra. Citá el documento y el PDF original.
+```
+
+No hay servidor ni base de datos. Son archivos en GitHub Pages. Un municipio podría publicar su archivo así, gratis, mañana.
+
+En un servidor con GPU la estimación es de decenas de miles de páginas por día. El papel no se va a digitalizar solo, pero ya casi.
+
+**[Abrir la demo →](/archivo/)**
+
+*Documentos: DNCP Paraguay, [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).*

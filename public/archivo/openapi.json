@@ -1,0 +1,298 @@
+{
+ "openapi": "3.1.0",
+ "info": {
+  "title": "Archivo buscable: expedientes de obra pública digitalizados",
+  "version": "1.0.0",
+  "description": "Documentos escaneados de obras públicas del MOPC (Paraguay), leídos con Unlimited-OCR 2, separados en documentos, clasificados y con datos extraídos. API estática de solo lectura: todo es GET a archivos JSON, sin clave ni límite. Para buscar, bajá /api/v1/corpus.json (texto completo de todos los documentos) y filtrá localmente, o usá los índices por obra y tipo. Licencia de los datos: CC BY 4.0, Dirección Nacional de Contrataciones Públicas (DNCP), Paraguay.",
+  "license": {
+   "name": "CC BY 4.0",
+   "url": "https://creativecommons.org/licenses/by/4.0/"
+  }
+ },
+ "servers": [
+  {
+   "url": "https://ssrrb.github.io/archivo"
+  }
+ ],
+ "paths": {
+  "/api/v1/stats.json": {
+   "get": {
+    "operationId": "getStats",
+    "summary": "Totales del archivo y calidad medida",
+    "responses": {
+     "200": {
+      "description": "Totales",
+      "content": {
+       "application/json": {}
+      }
+     }
+    }
+   }
+  },
+  "/api/v1/index.json": {
+   "get": {
+    "operationId": "listDocuments",
+    "summary": "Catálogo: un resumen por documento, con tipo, obra, campos extraídos y enlace al texto",
+    "responses": {
+     "200": {
+      "description": "Catálogo",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "documentos": {
+           "type": "array",
+           "items": {
+            "$ref": "#/components/schemas/Resumen"
+           }
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/api/v1/corpus.json": {
+   "get": {
+    "operationId": "getCorpus",
+    "summary": "Texto completo de todos los documentos en un solo archivo, para buscar localmente",
+    "responses": {
+     "200": {
+      "description": "Corpus",
+      "content": {
+       "application/json": {}
+      }
+     }
+    }
+   }
+  },
+  "/api/v1/docs/{id}.json": {
+   "get": {
+    "operationId": "getDocument",
+    "summary": "Un documento: texto por página, imágenes, campos y fuente",
+    "parameters": [
+     {
+      "name": "id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "pattern": "^doc-\\d{3}$"
+      },
+      "example": "doc-001"
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Documento",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Documento"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/api/v1/obras.json": {
+   "get": {
+    "operationId": "listObras",
+    "summary": "Las obras (llamados) del archivo, con sus documentos",
+    "responses": {
+     "200": {
+      "description": "Obras",
+      "content": {
+       "application/json": {}
+      }
+     }
+    }
+   }
+  },
+  "/api/v1/obras/{llamado}.json": {
+   "get": {
+    "operationId": "getObra",
+    "summary": "Una obra por número de llamado (ID de la DNCP)",
+    "parameters": [
+     {
+      "name": "llamado",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string"
+      },
+      "example": "351364"
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Obra",
+      "content": {
+       "application/json": {}
+      }
+     }
+    }
+   }
+  },
+  "/api/v1/tipos/{tipo}.json": {
+   "get": {
+    "operationId": "listByType",
+    "summary": "Documentos de un tipo",
+    "parameters": [
+     {
+      "name": "tipo",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "enum": [
+        "acta",
+        "adenda",
+        "contrato",
+        "dictamen",
+        "informe",
+        "nota",
+        "poliza",
+        "resolucion",
+        "documento"
+       ]
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Documentos",
+      "content": {
+       "application/json": {}
+      }
+     }
+    }
+   }
+  }
+ },
+ "components": {
+  "schemas": {
+   "Campos": {
+    "type": "object",
+    "description": "Datos extraídos automáticamente del texto; pueden faltar",
+    "properties": {
+     "llamado": {
+      "type": "string"
+     },
+     "licitacion": {
+      "type": "string"
+     },
+     "fecha": {
+      "type": "string",
+      "format": "date"
+     },
+     "empresa": {
+      "type": "string"
+     },
+     "ruc": {
+      "type": "string"
+     },
+     "monto": {
+      "type": "object",
+      "properties": {
+       "texto": {
+        "type": "string"
+       },
+       "guaranies": {
+        "type": "integer"
+       }
+      }
+     },
+     "plazo": {
+      "type": "string"
+     }
+    }
+   },
+   "Resumen": {
+    "type": "object",
+    "properties": {
+     "id": {
+      "type": "string"
+     },
+     "tipo": {
+      "type": "string"
+     },
+     "obra": {
+      "type": "string",
+      "description": "OCID de la DNCP"
+     },
+     "llamado": {
+      "type": "string"
+     },
+     "paginas": {
+      "type": "integer"
+     },
+     "campos": {
+      "$ref": "#/components/schemas/Campos"
+     },
+     "resumen": {
+      "type": "string"
+     },
+     "url": {
+      "type": "string"
+     },
+     "original": {
+      "type": "object",
+      "properties": {
+       "titulo": {
+        "type": "string"
+       },
+       "url": {
+        "type": "string"
+       }
+      }
+     }
+    }
+   },
+   "Documento": {
+    "type": "object",
+    "properties": {
+     "id": {
+      "type": "string"
+     },
+     "tipo": {
+      "type": "string"
+     },
+     "texto": {
+      "type": "string"
+     },
+     "campos": {
+      "$ref": "#/components/schemas/Campos"
+     },
+     "paginas": {
+      "type": "array",
+      "items": {
+       "type": "object",
+       "properties": {
+        "n": {
+         "type": "integer"
+        },
+        "imagen": {
+         "type": "string"
+        },
+        "texto": {
+         "type": "string"
+        }
+       }
+      }
+     },
+     "original": {
+      "type": "object"
+     },
+     "licencia": {
+      "type": "string"
+     }
+    }
+   }
+  }
+ }
+}

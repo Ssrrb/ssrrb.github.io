@@ -1,0 +1,9 @@
+# Sebastián Rojas
+
+> Portfolio y blog personal. Incluye un archivo público de expedientes de obra digitalizados con IA, consultable por API.
+
+## Archivo buscable
+
+- [Guía del archivo para modelos de lenguaje](https://ssrrb.github.io/archivo/llms.txt): 366 páginas escaneadas de 16 obras públicas del MOPC (Paraguay), separadas en 110 documentos, con API JSON sin clave
+- [OpenAPI](https://ssrrb.github.io/archivo/openapi.json): esquema de la API
+- [Artículo](https://ssrrb.github.io/blog/archivo-buscable-con-ia/): cómo se hizo

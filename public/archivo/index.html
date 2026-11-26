@@ -1,0 +1,540 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Archivo buscable</title>
+<meta name="description" content="366 páginas escaneadas de 16 obras públicas, leídas por una IA local y consultables por personas y por agentes de IA.">
+<link rel="alternate" type="text/plain" href="llms.txt" title="llms.txt">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F5F6F8;--surface:#FFFFFF;--fg:#18202B;--muted:#5A6573;--rule:#D9DEE5;
+  --accent:#2346A0;--accent-soft:#E6ECFA;--mark:#FFE58A;--scrim:rgba(10,14,20,.72);
+  --ok:#2E7550;--ok-soft:#E3F1E8;
+  --t-acta:#2346A0;--t-adenda:#9A5B12;--t-contrato:#2E7550;--t-dictamen:#7A3E9D;--t-informe:#1F7A8C;--t-nota:#5A6573;--t-resolucion:#A3302A;--t-poliza:#8A7A12;--t-plano:#C2410C;--t-documento:#9AA5B3;
+  --f-display:"Archivo","Helvetica Neue",Arial,sans-serif;
+  --f-body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0F1318;--surface:#171C24;--fg:#E7EBF0;--muted:#9AA5B3;--rule:#2B323D;
+  --accent:#8EA8F0;--accent-soft:#1E2945;--mark:#6B5A12;--ok:#7CC79C;--ok-soft:#18301F;
+  --t-acta:#8EA8F0;--t-adenda:#E2AC66;--t-contrato:#7CC79C;--t-dictamen:#C79BE0;--t-informe:#6CC3D3;--t-nota:#9AA5B3;--t-resolucion:#F08A82;--t-poliza:#D9C866;--t-plano:#FB923C;--t-documento:#5A6573;
+  color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0F1318;--surface:#171C24;--fg:#E7EBF0;--muted:#9AA5B3;--rule:#2B323D;
+  --accent:#8EA8F0;--accent-soft:#1E2945;--mark:#6B5A12;--ok:#7CC79C;--ok-soft:#18301F;
+  --t-acta:#8EA8F0;--t-adenda:#E2AC66;--t-contrato:#7CC79C;--t-dictamen:#C79BE0;--t-informe:#6CC3D3;--t-nota:#9AA5B3;--t-resolucion:#F08A82;--t-poliza:#D9C866;--t-plano:#FB923C;--t-documento:#5A6573;
+  color-scheme:dark}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.6 var(--f-body);padding:0 16px 72px}
+.wrap{max-width:1120px;margin:0 auto}
+h1,h2,h3{font-family:var(--f-display);line-height:1.1;margin:0;text-wrap:balance}
+h1{font-size:clamp(2.2rem,6vw,4rem);font-weight:800;letter-spacing:-.025em}
+h2{font-size:clamp(1.45rem,3vw,2rem);font-weight:700;letter-spacing:-.01em}
+h3{font-size:1rem;font-weight:700}
+p{margin:0}
+a{color:var(--accent)}
+code,pre{font-family:var(--f-mono);font-size:.85rem}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.eyebrow{font:600 .74rem/1 var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+.muted{color:var(--muted)}
+nav.top{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:18px 0;font-size:.9rem}
+nav.top a{text-decoration:none;color:var(--muted)} nav.top a:hover{color:var(--fg)}
+nav.top .links{display:flex;gap:18px}
+nav.top a{white-space:nowrap}
+@media (max-width:560px){nav.top .links a:not(:last-child){display:none}}
+header.hero{display:grid;gap:22px;padding:48px 0 36px}
+.lede{font-size:clamp(1.05rem,2vw,1.25rem);max-width:58ch;color:var(--muted)}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:14px;overflow:hidden;margin-top:12px}
+.kpi{background:var(--surface);padding:18px 20px;display:grid;gap:4px}
+.kpi b{font:800 clamp(1.8rem,4vw,2.6rem)/1 var(--f-display);font-variant-numeric:tabular-nums}
+.kpi span{font-size:.85rem;color:var(--muted)}
+@media (max-width:720px){.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.kpi[hidden]{display:none}
+section{padding:48px 0;border-top:1px solid var(--rule);display:grid;gap:22px}
+.head{display:grid;gap:8px;max-width:70ch}
+
+/* pile */
+.pile-wrap{background:var(--surface);border:1px solid var(--rule);border-radius:14px;padding:18px;display:grid;gap:14px}
+.pile{display:grid;grid-template-columns:repeat(auto-fill,minmax(14px,1fr));gap:3px}
+.pile i{display:block;aspect-ratio:3/4;border-radius:2px;background:var(--rule);transition:background-color .5s ease,transform .5s ease;cursor:pointer}
+.pile i.start{box-shadow:inset 0 2px 0 var(--fg)}
+.pile i:hover{transform:scale(1.6);z-index:2;position:relative}
+.pile-bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:.82rem;color:var(--muted)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:10px;height:10px;border-radius:2px;display:inline-block}
+.btn{font:600 .9rem/1 var(--f-body);border:1px solid var(--rule);background:var(--surface);color:var(--fg);padding:10px 14px;border-radius:9px;cursor:pointer}
+.btn:hover{border-color:var(--accent)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--surface)}
+.peek{position:fixed;pointer-events:none;width:180px;border:1px solid var(--rule);border-radius:8px;overflow:hidden;background:var(--surface);box-shadow:0 10px 30px rgba(0,0,0,.25);display:none;z-index:40}
+.peek img{width:100%;display:block}
+.peek div{padding:6px 8px;font-size:.75rem}
+
+/* search */
+.searchbox{display:flex;gap:8px;background:var(--surface);border:1px solid var(--rule);border-radius:14px;padding:8px}
+.searchbox input{flex:1;min-width:0;border:0;background:transparent;color:var(--fg);font:500 1.1rem var(--f-body);padding:10px 12px}
+.searchbox input:focus{outline:none}
+.searchbox:focus-within{border-color:var(--accent)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font:500 .82rem/1 var(--f-body);border:1px solid var(--rule);background:var(--surface);color:var(--fg);padding:7px 11px;border-radius:99px;cursor:pointer;display:inline-flex;gap:6px;align-items:center}
+.chip[aria-pressed="true"]{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.chip i{width:8px;height:8px;border-radius:50%}
+.chip small{opacity:.6}
+.filters{display:grid;gap:10px}
+.examples{display:flex;flex-wrap:wrap;gap:6px;font-size:.85rem}
+.examples button{all:unset;cursor:pointer;color:var(--accent);border-bottom:1px dashed currentColor}
+.meta-line{font-size:.85rem;color:var(--muted)}
+.results{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:14px}
+.card{display:grid;grid-template-columns:92px minmax(0,1fr);gap:14px;background:var(--surface);border:1px solid var(--rule);border-radius:12px;padding:12px;cursor:pointer;text-align:left;color:inherit;font:inherit;transition:border-color .15s,transform .15s}
+.card:hover{border-color:var(--accent);transform:translateY(-1px)}
+.card img{width:92px;height:120px;object-fit:cover;object-position:top;border-radius:6px;border:1px solid var(--rule);background:var(--bg)}
+.card .body{display:grid;gap:6px;align-content:start;min-width:0}
+.tag{font:600 .72rem/1 var(--f-mono);text-transform:uppercase;letter-spacing:.06em;display:inline-flex;align-items:center;gap:6px}
+.tag i{width:8px;height:8px;border-radius:2px}
+.card .snip{font-size:.86rem;color:var(--muted);display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
+mark{background:var(--mark);color:inherit;border-radius:2px;padding:0 1px}
+.facts{display:flex;flex-wrap:wrap;gap:4px 10px;font-size:.78rem;color:var(--muted)}
+.facts b{color:var(--fg);font-weight:600}
+.more{justify-self:center}
+
+/* charts */
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+@media (max-width:820px){.grid2{grid-template-columns:1fr}}
+.panel{background:var(--surface);border:1px solid var(--rule);border-radius:14px;padding:18px;display:grid;gap:14px;align-content:start}
+.bars{display:grid;gap:7px}
+.bar{display:grid;grid-template-columns:96px minmax(0,1fr) 44px;gap:10px;align-items:center;font-size:.85rem}
+.bar .track{height:14px;background:var(--bg);border-radius:4px;overflow:hidden}
+.bar .fill{height:100%;width:0;border-radius:4px;transition:width 1s cubic-bezier(.2,.7,.2,1)}
+.bar b{font-variant-numeric:tabular-nums;text-align:right}
+.rings{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.ring{display:grid;justify-items:center;gap:6px;text-align:center;font-size:.82rem;color:var(--muted)}
+.ring svg{width:100%;max-width:120px}
+.ring .v{font:800 1.4rem var(--f-display);fill:var(--fg)}
+.flow{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}
+@media (max-width:820px){.flow{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.step{background:var(--surface);border:1px solid var(--rule);border-radius:12px;padding:14px;display:grid;gap:6px}
+.step b{font:700 .74rem var(--f-mono);color:var(--accent)}
+.step span{font-size:.85rem;color:var(--muted)}
+
+/* api */
+.tabs{display:flex;gap:4px;flex-wrap:wrap}
+.tab{font:600 .85rem var(--f-body);border:0;background:transparent;color:var(--muted);padding:8px 12px;border-radius:8px;cursor:pointer}
+.tab[aria-selected="true"]{background:var(--accent-soft);color:var(--accent)}
+pre.code{margin:0;white-space:pre-wrap;word-break:break-word;background:#0F1318;color:#DCE3EC;border-radius:12px;padding:16px;overflow:auto;line-height:1.55;max-height:420px}
+pre.code .c{color:#7D8A99}
+.endpoints{display:grid;gap:6px}
+.ep{display:grid;grid-template-columns:52px minmax(0,1fr) auto;gap:10px;align-items:center;font-size:.86rem;padding:8px 10px;border:1px solid var(--rule);border-radius:9px;background:var(--surface)}
+.ep code{background:none;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ep .get{font:700 .72rem var(--f-mono);color:var(--ok);background:var(--ok-soft);padding:4px 6px;border-radius:5px;text-align:center}
+.ep a{font-size:.8rem}
+.ep .desc{grid-column:2/4;color:var(--muted);font-size:.8rem;margin-top:-6px}
+.try{display:grid;gap:10px}
+.try-row{display:flex;gap:8px;flex-wrap:wrap}
+.try-row select{font:inherit;padding:9px;border-radius:9px;border:1px solid var(--rule);background:var(--surface);color:var(--fg);flex:1;min-width:0}
+
+/* viewer */
+dialog{border:0;padding:0;max-width:min(1180px,calc(100vw - 24px));width:100%;max-height:calc(100vh - 24px);background:var(--surface);color:var(--fg);border-radius:16px;overflow:hidden}
+dialog::backdrop{background:var(--scrim)}
+.viewer{display:grid;grid-template-rows:auto minmax(0,1fr);height:calc(100vh - 24px);max-height:900px}
+.vhead{display:flex;gap:12px;align-items:center;justify-content:space-between;padding:12px 16px;border-bottom:1px solid var(--rule);flex-wrap:wrap}
+.vhead .t{display:grid;gap:2px;min-width:0}
+.vhead .t div{font-size:.82rem;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:70vw}
+.vbody{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);min-height:0}
+@media (max-width:820px){.vbody{grid-template-columns:1fr;overflow:auto}}
+.vimg{background:var(--bg);overflow:auto;padding:14px;display:grid;justify-items:center;align-content:start;gap:10px}
+.vimg img{max-width:100%;border-radius:4px;box-shadow:0 2px 12px rgba(0,0,0,.15);background:#fff}
+.vtext{overflow:auto;padding:16px 20px;display:grid;gap:14px;align-content:start;border-left:1px solid var(--rule)}
+.vtext pre{white-space:pre-wrap;word-break:break-word;font:400 .86rem/1.6 var(--f-mono);margin:0}
+.pager{display:flex;gap:6px;align-items:center;font-size:.85rem}
+.fields{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;font-size:.85rem;padding:12px;background:var(--bg);border-radius:10px}
+.fields dt{color:var(--muted)} .fields dd{margin:0;font-weight:600;word-break:break-word}
+.vlinks{display:flex;gap:12px;flex-wrap:wrap;font-size:.85rem}
+footer{border-top:1px solid var(--rule);padding:28px 0 0;font-size:.85rem;color:var(--muted);display:grid;gap:6px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav class="top">
+  <a href="/blog/archivo-buscable-con-ia/">← Artículo</a>
+  <div class="links"><a href="#buscar">Buscar</a><a href="#numeros">Números</a><a href="#api">API para IA</a><a href="llms.txt">llms.txt</a></div>
+</nav>
+
+<header class="hero">
+  <div class="eyebrow">Archivo buscable · obras públicas del MOPC</div>
+  <h1>Una pila de papel que ahora responde preguntas.</h1>
+  <p class="lede">Expedientes de obra escaneados, leídos por una IA que corre en una sola computadora, separados en documentos y abiertos como API para personas y agentes.</p>
+  <div class="kpis" id="kpis">
+    <div class="kpi"><b data-n="paginas">0</b><span>páginas escaneadas</span></div>
+    <div class="kpi"><b data-n="documentos">0</b><span>documentos separados</span></div>
+    <div class="kpi"><b data-n="obras">0</b><span>obras públicas</span></div>
+    <div class="kpi" hidden><b data-n="laminas_de_planos">0</b><span>láminas de planos</span></div>
+    <div class="kpi"><b data-n="palabras">0</b><span>palabras leídas</span></div>
+  </div>
+</header>
+
+<section id="pila">
+  <div class="head">
+    <div class="eyebrow">01 · La pila</div>
+    <h2>Cada cuadrado es una hoja escaneada.</h2>
+    <p class="muted">Entran mezcladas y sin texto. La IA las lee, decide dónde empieza cada documento y qué es.</p>
+  </div>
+  <div class="pile-wrap">
+    <div class="pile-bar">
+      <div class="legend" id="legend"></div>
+      <button class="btn primary" id="sortBtn" type="button">Leer y ordenar</button>
+    </div>
+    <div class="pile" id="pile" aria-label="Páginas del archivo"></div>
+    <div class="meta-line">Pasá el mouse por una hoja para verla. Tocala para abrir su documento.</div>
+  </div>
+</section>
+
+<section id="buscar">
+  <div class="head">
+    <div class="eyebrow">02 · Buscar</div>
+    <h2>Preguntá como hablás.</h2>
+  </div>
+  <form class="searchbox" id="sform" role="search">
+    <input id="q" type="search" placeholder="Ej.: adenda que prorroga el plazo por lluvias" autocomplete="off" aria-label="Buscar en el archivo">
+    <button class="btn primary" type="submit">Buscar</button>
+  </form>
+  <div class="examples" id="examples"><span class="muted">Probá:</span></div>
+  <div class="filters">
+    <div class="chips" id="typeChips"></div>
+    <div class="chips" id="obraChips"></div>
+  </div>
+  <div class="meta-line" id="count"></div>
+  <div class="results" id="results"></div>
+  <button class="btn more" id="more" type="button" hidden>Ver más</button>
+</section>
+
+<section id="numeros">
+  <div class="head">
+    <div class="eyebrow">03 · Números</div>
+    <h2>Medido contra la verdad, no a ojo.</h2>
+    <p class="muted">Calidad medida en una prueba a ciegas de 180 páginas que el sistema nunca había visto, comparando con el portal de la DNCP.</p>
+  </div>
+  <div class="rings" id="rings"></div>
+  <div class="grid2">
+    <div class="panel"><h3>Documentos por tipo</h3><div class="bars" id="byType"></div></div>
+    <div class="panel"><h3>Páginas por obra</h3><div class="bars" id="byObra"></div></div>
+  </div>
+  <div class="flow">
+    <div class="step"><b>1 · Escanear</b><span>Hojas sueltas o cuadernos, en pila.</span></div>
+    <div class="step"><b>2 · Leer</b><span>Unlimited-OCR 2, 1.7B, en la propia PC.</span></div>
+    <div class="step"><b>3 · Separar</b><span>Dónde empieza cada documento.</span></div>
+    <div class="step"><b>4 · Extraer</b><span>Tipo, fecha, llamado, empresa, monto.</span></div>
+    <div class="step"><b>5 · Publicar</b><span>Buscador, API, llms.txt y MCP.</span></div>
+  </div>
+</section>
+
+<section id="api">
+  <div class="head">
+    <div class="eyebrow">04 · API para IA</div>
+    <h2>El archivo también lo puede leer una IA.</h2>
+    <p class="muted">JSON estático, sin clave. Un agente lee <a href="llms.txt">llms.txt</a>, baja el corpus y cita el PDF original.</p>
+  </div>
+  <div class="grid2">
+    <div class="panel">
+      <div class="tabs" role="tablist" id="tabs"></div>
+      <pre class="code" id="code"></pre>
+    </div>
+    <div class="panel">
+      <h3>Endpoints</h3>
+      <div class="endpoints" id="endpoints"></div>
+    </div>
+  </div>
+  <div class="panel try">
+    <h3>Probala acá</h3>
+    <div class="try-row">
+      <select id="trySel" aria-label="Endpoint"></select>
+      <button class="btn primary" id="tryBtn" type="button">GET</button>
+    </div>
+    <pre class="code" id="tryOut"><span class="c">// La respuesta aparece acá</span></pre>
+  </div>
+</section>
+
+<footer>
+  <div>Documentos: Dirección Nacional de Contrataciones Públicas (DNCP), Paraguay, <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Cada documento enlaza a su PDF original en contrataciones.gov.py.</div>
+  <div>Lectura: Unlimited-OCR 2. Campos extraídos automáticamente. Por <a href="/">Sebastián Rojas</a>.</div>
+</footer>
+</div>
+
+<div class="peek" id="peek"><img alt=""><div></div></div>
+
+<dialog id="viewer" aria-label="Documento">
+  <div class="viewer">
+    <div class="vhead">
+      <div class="t"><span class="tag" id="vTag"></span><div id="vObra"></div></div>
+      <div class="pager"><button class="btn" id="vPrev" type="button" aria-label="Página anterior">←</button><span id="vPage"></span><button class="btn" id="vNext" type="button" aria-label="Página siguiente">→</button><button class="btn" id="vClose" type="button">Cerrar</button></div>
+    </div>
+    <div class="vbody">
+      <div class="vimg"><img id="vImg" alt="Página escaneada"></div>
+      <div class="vtext">
+        <dl class="fields" id="vFields"></dl>
+        <div class="vlinks" id="vLinks"></div>
+        <pre id="vText"></pre>
+      </div>
+    </div>
+  </div>
+</dialog>
+
+<script>
+(() => {
+const BASE = new URL('.', location.href).href;
+const ABS = 'https://ssrrb.github.io/archivo';
+const TYPES = {acta:'Acta',adenda:'Adenda',contrato:'Contrato',dictamen:'Dictamen',informe:'Informe',nota:'Nota',poliza:'Póliza',resolucion:'Resolución',plano:'Plano',documento:'Documento'};
+const EXAMPLES = ['prórroga del plazo por lluvias','sección transversal típica','alcantarilla','acta de apertura de ofertas','resolución de adjudicación','Benito Roggio','orden de inicio de obra','descalifica al oferente','Itapúa caminos vecinales','póliza de fiel cumplimiento'];
+const $ = s => document.querySelector(s);
+const col = t => `var(--t-${t || 'documento'})`;
+const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const fmt = n => n.toLocaleString('es-PY');
+// Accent folding one char at a time keeps positions aligned with the original text, for highlighting.
+const foldc = s => Array.from(s, c => c.normalize('NFD')[0].toLowerCase()).join('');
+const stem = w => w.length > 4 ? w.replace(/(es|s)$/, '') : w;
+const STOP = new Set('de la el los las del en y a que por con para un una se al o su lo es como mas sus fue son este esta'.split(' '));
+const words = s => (foldc(s).match(/[a-z0-9]+/g) || []).filter(w => !STOP.has(w)).map(stem);
+
+let INDEX, CORPUS, OBRAS, STATS, bm, state = {q:'', tipo:null, obra:null, shown:12};
+
+function BM25(texts){
+  const tf = texts.map(t => { const m = new Map(); for (const w of words(t)) m.set(w, (m.get(w)||0)+1); return m; });
+  const len = tf.map(m => { let n=0; m.forEach(v => n+=v); return n; });
+  const avg = len.reduce((a,b)=>a+b,0)/len.length, df = new Map();
+  tf.forEach(m => m.forEach((_, w) => df.set(w, (df.get(w)||0)+1)));
+  const idf = w => { const n = df.get(w); return n ? Math.log(1 + (texts.length - n + .5)/(n + .5)) : 0; };
+  return q => tf.map((m, i) => { let s=0; for (const w of new Set(q)) { const f = m.get(w); if (f) s += idf(w)*f*2.5/(f + 1.5*(.25 + .75*len[i]/avg)); } return s; });
+}
+
+function snippet(text, q){
+  const flat = text.replace(/\s+/g,' '), low = foldc(flat);
+  let at = -1;
+  for (const w of q) { const i = low.search(new RegExp('\\b' + w)); if (i >= 0 && (at < 0 || i < at)) at = i; }
+  const start = Math.max(0, at - 70), cut = flat.slice(start, start + 260);
+  let html = esc(cut);
+  if (q.length) {
+    const rx = new RegExp('\\b(' + q.map(w => w.replace(/[^a-z0-9]/g,'')).join('|') + ')[a-z]*', 'g');
+    const lc = foldc(cut); const marks = []; let m;
+    while ((m = rx.exec(lc))) marks.push([m.index, m.index + m[0].length]);
+    html = ''; let p = 0;
+    for (const [a,b] of marks) { html += esc(cut.slice(p,a)) + '<mark>' + esc(cut.slice(a,b)) + '</mark>'; p = b; }
+    html += esc(cut.slice(p));
+  }
+  return (start ? '… ' : '') + html + ' …';
+}
+
+function count(el, to){
+  const t0 = performance.now(), d = 1100;
+  const tick = now => { const k = Math.min(1, (now - t0)/d), e = 1 - Math.pow(1-k, 3); el.textContent = fmt(Math.round(to*e)); if (k < 1) requestAnimationFrame(tick); };
+  requestAnimationFrame(tick);
+}
+
+function onVisible(el, fn){
+  if (!('IntersectionObserver' in window)) return fn();
+  const io = new IntersectionObserver(es => { if (es.some(e => e.isIntersecting)) { io.disconnect(); fn(); } }, {threshold:.25});
+  io.observe(el);
+}
+
+/* ---------- pile ---------- */
+let pageCells = [];
+function buildPile(){
+  const pages = [];
+  INDEX.documentos.forEach(d => { for (let k=0; k<d.paginas; k++) pages.push({doc:d, k}); });
+  // Shuffled like a real pile, seeded so it looks the same on every visit.
+  let seed = 7; const rnd = () => (seed = (seed*16807) % 2147483647) / 2147483647;
+  const shuffled = pages.map(p => [rnd(), p]).sort((a,b) => a[0]-b[0]).map(x => x[1]);
+  const pile = $('#pile'); pile.innerHTML = '';
+  pageCells = shuffled.map(p => { const i = document.createElement('i'); i._p = p; pile.appendChild(i); return i; });
+  const used = [...new Set(INDEX.documentos.map(d => d.tipo))];
+  $('#legend').innerHTML = used.map(t => `<span><i style="background:${col(t)}"></i>${TYPES[t]}</span>`).join('');
+  const peek = $('#peek');
+  pile.addEventListener('mousemove', e => {
+    const c = e.target.closest('i'); if (!c || !c._p) { peek.style.display='none'; return; }
+    const {doc, k} = c._p;
+    peek.querySelector('img').src = BASE + doc.miniatura.replace(/(\d{4})\.webp$/, m => String(parseInt(m) + k).padStart(4,'0') + '.webp');
+    peek.querySelector('div').textContent = `${doc.tipo_label} · llamado ${doc.llamado} · pág. ${k+1}/${doc.paginas}`;
+    const x = Math.min(innerWidth - 196, e.clientX + 16), y = Math.min(innerHeight - 280, e.clientY + 16);
+    peek.style.left = x + 'px'; peek.style.top = y + 'px'; peek.style.display = 'block';
+  });
+  pile.addEventListener('mouseleave', () => peek.style.display = 'none');
+  pile.addEventListener('click', e => { const c = e.target.closest('i'); if (c && c._p) openDoc(c._p.doc.id, c._p.k); });
+}
+let sorted = false;
+function sortPile(){
+  const pile = $('#pile');
+  if (sorted) { buildPile(); sorted = false; $('#sortBtn').textContent = 'Leer y ordenar'; return; }
+  sorted = true; $('#sortBtn').textContent = 'Volver a mezclar';
+  // Read: colour in random order, then regroup in document order.
+  const order = pageCells.map((c, i) => i).sort(() => Math.random() - .5);
+  order.forEach((idx, n) => setTimeout(() => { pageCells[idx].style.background = col(pageCells[idx]._p.doc.tipo); }, n * 4));
+  setTimeout(() => {
+    const byDoc = [...pageCells].sort((a,b) => a._p.doc.id.localeCompare(b._p.doc.id) || a._p.k - b._p.k);
+    byDoc.forEach(c => { if (c._p.k === 0) c.classList.add('start'); pile.appendChild(c); });
+  }, order.length * 4 + 500);
+}
+
+/* ---------- search ---------- */
+function chips(){
+  const tc = {}; INDEX.documentos.forEach(d => tc[d.tipo] = (tc[d.tipo]||0)+1);
+  $('#typeChips').innerHTML = Object.entries(tc).sort((a,b)=>b[1]-a[1]).map(([t,n]) =>
+    `<button class="chip" type="button" data-tipo="${t}" aria-pressed="false"><i style="background:${col(t)}"></i>${TYPES[t]} <small>${n}</small></button>`).join('');
+  $('#obraChips').innerHTML = OBRAS.map(o =>
+    `<button class="chip" type="button" data-obra="${o.llamado}" aria-pressed="false" title="${esc(o.titulo)}">${o.llamado} <small>${o.documentos.length}</small></button>`).join('');
+  document.querySelectorAll('[data-tipo]').forEach(b => b.onclick = () => { state.tipo = state.tipo === b.dataset.tipo ? null : b.dataset.tipo; state.shown = 12; render(); });
+  document.querySelectorAll('[data-obra]').forEach(b => b.onclick = () => { state.obra = state.obra === b.dataset.obra ? null : b.dataset.obra; state.shown = 12; render(); });
+  $('#examples').innerHTML += EXAMPLES.map(e => `<button type="button">${esc(e)}</button>`).join('');
+  $('#examples').querySelectorAll('button').forEach(b => b.onclick = () => { $('#q').value = b.textContent; state.q = b.textContent; state.shown = 12; render(); $('#q').focus(); });
+}
+
+function render(){
+  document.querySelectorAll('[data-tipo]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.tipo === state.tipo)));
+  document.querySelectorAll('[data-obra]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.obra === state.obra)));
+  const q = words(state.q), t0 = performance.now();
+  const scores = q.length ? bm(q) : null;
+  let list = INDEX.documentos.map((d, i) => ({d, s: scores ? scores[i] : 0, text: CORPUS[i].texto}))
+    .filter(x => (!state.tipo || x.d.tipo === state.tipo) && (!state.obra || x.d.llamado === state.obra) && (!scores || x.s > 0));
+  if (scores) list.sort((a,b) => b.s - a.s);
+  const ms = performance.now() - t0;
+  $('#count').textContent = q.length
+    ? `${list.length} documentos en ${ms < 1 ? '<1' : Math.round(ms)} ms, entre ${fmt(STATS.paginas)} páginas`
+    : `${list.length} documentos`;
+  $('#results').innerHTML = list.slice(0, state.shown).map(({d, text}) => {
+    const c = d.campos, facts = [c.fecha && `<span><b>${c.fecha.split('-').reverse().join('/')}</b></span>`,
+      `<span>llamado <b>${d.llamado}</b></span>`, c.empresa && `<span><b>${esc(c.empresa)}</b></span>`,
+      c.monto && `<span><b>${esc(c.monto.texto)}</b></span>`, `<span>${d.paginas} pág.</span>`].filter(Boolean).join('');
+    return `<button class="card" type="button" data-id="${d.id}">
+      <img loading="lazy" src="${BASE + d.miniatura}" alt="">
+      <div class="body"><span class="tag" style="color:${col(d.tipo)}"><i style="background:${col(d.tipo)}"></i>${d.tipo_label} · ${d.id}</span>
+      <div class="snip">${snippet(text, q)}</div><div class="facts">${facts}</div></div></button>`;
+  }).join('');
+  $('#more').hidden = list.length <= state.shown;
+  document.querySelectorAll('.card').forEach(b => b.onclick = () => openDoc(b.dataset.id, 0));
+}
+
+/* ---------- viewer ---------- */
+let cur = null, curPage = 0;
+async function openDoc(id, page){
+  const d = await (await fetch(`${BASE}api/v1/docs/${id}.json`)).json();
+  cur = d; curPage = page || 0;
+  $('#vTag').innerHTML = `<i style="background:${col(d.tipo)}"></i>${d.tipo_label} · ${d.id}`;
+  $('#vTag').style.color = col(d.tipo);
+  $('#vObra').textContent = `Llamado ${d.llamado} · ${d.obra.titulo}`;
+  const c = d.campos, rows = [['Fecha', c.fecha && c.fecha.split('-').reverse().join('/')], ['Llamado', c.llamado], ['Licitación', c.licitacion],
+    ['Empresa', c.empresa], ['RUC', c.ruc], ['Monto', c.monto && c.monto.texto], ['Plazo', c.plazo], ['Escala', c.escala], ['Progresivas', c.progresivas]].filter(r => r[1]);
+  $('#vFields').innerHTML = rows.map(([k,v]) => `<dt>${k}</dt><dd>${esc(v)}</dd>`).join('');
+  $('#vLinks').innerHTML = `<a href="${esc(d.original.url)}" target="_blank" rel="noopener">PDF original en la DNCP</a><a href="api/v1/docs/${d.id}.json" target="_blank">JSON de la API</a>`;
+  showPage();
+  const dlg = $('#viewer'); if (!dlg.open) dlg.showModal();
+}
+function showPage(){
+  const p = cur.paginas[curPage];
+  $('#vImg').src = p.imagen.replace(ABS + '/', BASE);
+  $('#vText').innerHTML = esc(p.texto);
+  $('#vPage').textContent = `${curPage + 1} / ${cur.paginas.length}`;
+  $('#vPrev').disabled = curPage === 0; $('#vNext').disabled = curPage === cur.paginas.length - 1;
+}
+$('#vPrev').onclick = () => { if (curPage > 0) { curPage--; showPage(); } };
+$('#vNext').onclick = () => { if (curPage < cur.paginas.length - 1) { curPage++; showPage(); } };
+$('#vClose').onclick = () => $('#viewer').close();
+$('#viewer').addEventListener('click', e => { if (e.target === $('#viewer')) $('#viewer').close(); });
+document.addEventListener('keydown', e => { if (!$('#viewer').open) return; if (e.key === 'ArrowRight') $('#vNext').click(); if (e.key === 'ArrowLeft') $('#vPrev').click(); });
+
+/* ---------- charts ---------- */
+function bars(el, rows, colorOf){
+  const max = Math.max(...rows.map(r => r[1]));
+  el.innerHTML = rows.map(([k, v, label]) => `<div class="bar"><span title="${esc(label||k)}">${esc(k)}</span><div class="track"><div class="fill" data-w="${v/max*100}" style="background:${colorOf(k)}"></div></div><b>${v}</b></div>`).join('');
+  onVisible(el, () => el.querySelectorAll('.fill').forEach(f => f.style.width = f.dataset.w + '%'));
+}
+function rings(){
+  const q = STATS.calidad.prueba_a_ciegas;
+  const items = [[q.llamado_igual_al_portal, 'Llamado igual al portal'], [q.tipo_correcto_por_pagina, 'Tipo correcto por página'], [q.f1_cortes, 'Cortes entre documentos (F1)']];
+  const r = 46, C = 2*Math.PI*r;
+  $('#rings').innerHTML = items.map(([v, label]) => `<div class="ring panel"><svg viewBox="0 0 120 120" role="img" aria-label="${label}: ${Math.round(v*100)}%">
+    <circle cx="60" cy="60" r="${r}" fill="none" stroke="var(--rule)" stroke-width="10"/>
+    <circle cx="60" cy="60" r="${r}" fill="none" stroke="var(--accent)" stroke-width="10" stroke-linecap="round" stroke-dasharray="${C}" stroke-dashoffset="${C}" data-off="${C*(1-v)}" transform="rotate(-90 60 60)" style="transition:stroke-dashoffset 1.2s cubic-bezier(.2,.7,.2,1)"/>
+    <text x="60" y="68" text-anchor="middle" class="v">${Math.round(v*100)}%</text></svg><span>${label}</span></div>`).join('');
+  onVisible($('#rings'), () => document.querySelectorAll('#rings [data-off]').forEach(c => c.setAttribute('stroke-dashoffset', c.dataset.off)));
+}
+
+/* ---------- api ---------- */
+const SNIPPETS = {
+  'Claude / ChatGPT': `<span class="c"># Pegale esto a cualquier asistente con acceso web:</span>
+Leé ${ABS}/llms.txt y usá esa API para responder:
+¿Qué adendas prorrogaron plazos de obra y por qué motivo?
+Citá el id del documento y el PDF original.`,
+  'curl': `<span class="c"># Totales y calidad</span>
+curl ${ABS}/api/v1/stats.json
+
+<span class="c"># Todas las adendas</span>
+curl ${ABS}/api/v1/tipos/adenda.json
+
+<span class="c"># Un documento completo, con texto por página</span>
+curl ${ABS}/api/v1/docs/doc-001.json`,
+  'Python': `import requests, re
+API = "${ABS}/api/v1"
+corpus = requests.get(f"{API}/corpus.json").json()["documentos"]
+
+hits = [d for d in corpus if re.search(r"prorrog", d["texto"], re.I)]
+for d in hits[:5]:
+    doc = requests.get(f"{API}/docs/{d['id']}.json").json()
+    print(doc["id"], doc["tipo"], doc["campos"].get("fecha"), doc["original"]["url"])`,
+  'MCP': `<span class="c"># Servidor MCP (solo Python estándar): herramientas</span>
+<span class="c"># buscar, leer_documento, listar_obras, estadisticas</span>
+curl -O https://raw.githubusercontent.com/ssrrb/digitalizar-archivos/main/api/mcp_archivo.py
+claude mcp add archivo -- python3 mcp_archivo.py
+
+<span class="c"># Después, en Claude:</span>
+<span class="c"># "¿Qué empresas firmaron contratos y por qué montos?"</span>`,
+};
+function api(){
+  const tabs = Object.keys(SNIPPETS);
+  $('#tabs').innerHTML = tabs.map((t, i) => `<button class="tab" role="tab" type="button" aria-selected="${i===0}">${t}</button>`).join('');
+  const show = t => { $('#code').innerHTML = SNIPPETS[t]; document.querySelectorAll('.tab').forEach(b => b.setAttribute('aria-selected', String(b.textContent === t))); };
+  document.querySelectorAll('.tab').forEach(b => b.onclick = () => show(b.textContent));
+  show(tabs[0]);
+  const eps = [['/llms.txt', 'Guía para modelos de lenguaje'], ['/api/v1/stats.json', 'Totales y calidad medida'], ['/api/v1/index.json', 'Catálogo con campos extraídos'],
+    ['/api/v1/corpus.json', 'Texto completo, para buscar'], ['/api/v1/docs/doc-001.json', 'Un documento, por id'], ['/api/v1/obras.json', 'Las obras y sus documentos'],
+    ['/api/v1/obras/351364.json', 'Una obra, por llamado'], ['/api/v1/tipos/adenda.json', 'Documentos de un tipo'], ['/openapi.json', 'Esquema OpenAPI 3.1'], ['/llms-full.txt', 'Todo el archivo en Markdown']];
+  $('#endpoints').innerHTML = eps.map(([p, d]) => `<div class="ep"><span class="get">GET</span><code>${p}</code><a href="${'.' + p}" target="_blank">abrir</a><span class="desc">${d}</span></div>`).join('');
+  $('#trySel').innerHTML = eps.filter(e => e[0].endsWith('.json') && !e[0].includes('corpus')).map(([p]) => `<option>${p}</option>`).join('');
+  $('#tryBtn').onclick = async () => {
+    const p = $('#trySel').value, t0 = performance.now();
+    $('#tryOut').textContent = 'GET ' + p + ' …';
+    const r = await fetch('.' + p), body = await r.text(), ms = Math.round(performance.now() - t0);
+    let pretty = body; try { pretty = JSON.stringify(JSON.parse(body), null, 2); } catch {}
+    if (pretty.length > 6000) pretty = pretty.slice(0, 6000) + '\n…';
+    $('#tryOut').innerHTML = `<span class="c">// ${r.status} · ${fmt(body.length)} bytes · ${ms} ms</span>\n` + esc(pretty);
+  };
+}
+
+/* ---------- boot ---------- */
+async function boot(){
+  const j = p => fetch(BASE + p).then(r => r.json());
+  [INDEX, STATS, OBRAS] = await Promise.all([j('api/v1/index.json'), j('api/v1/stats.json'), j('api/v1/obras.json').then(o => o.obras)]);
+  document.querySelectorAll('[data-n]').forEach(el => { if (STATS[el.dataset.n]) { el.parentNode.hidden = false; count(el, STATS[el.dataset.n]); } });
+  buildPile(); rings(); api();
+  bars($('#byType'), Object.entries(STATS.tipos).map(([t, n]) => [TYPES[t], n]), k => col(Object.keys(TYPES).find(t => TYPES[t] === k)));
+  bars($('#byObra'), OBRAS.map(o => [o.llamado, o.paginas, o.titulo]).sort((a,b) => b[1]-a[1]), () => 'var(--accent)');
+  CORPUS = (await j('api/v1/corpus.json')).documentos;
+  bm = BM25(CORPUS.map((d, i) => `${INDEX.documentos[i].tipo_label} ${d.empresa || ''} ${d.texto}`));
+  chips(); render();
+  const params = new URLSearchParams(location.search);
+  if (params.get('q')) { $('#q').value = state.q = params.get('q'); render(); }
+  onVisible($('#pila'), () => setTimeout(() => { if (!sorted) sortPile(); }, 600));
+}
+$('#sortBtn').onclick = sortPile;
+$('#sform').onsubmit = e => { e.preventDefault(); state.q = $('#q').value; state.shown = 12; render(); };
+$('#q').addEventListener('input', () => { clearTimeout(state.t); state.t = setTimeout(() => { state.q = $('#q').value; state.shown = 12; render(); }, 180); });
+$('#more').onclick = () => { state.shown += 12; render(); };
+boot();
+})();
+</script>
+</body>
+</html>
