@@ -1,9 +1,13 @@
 ---
 title: "Un archivo de papel que responde preguntas"
 publishedAt: "2026-11-26"
-summary: "Escaneamos 390 hojas de 16 obras públicas y las dejamos consultables en lenguaje natural. La IA corre dentro de una computadora y los documentos no salen a internet."
+summary: "Un funcionario escribe «quién ganó la licitación» y aparecen las resoluciones de adjudicación, aunque ninguna diga «ganó». Un archivo de papel escaneado, consultable con palabras comunes, que corre dentro de una computadora."
 image: "/blog/archivo-buscable/hero.webp"
 ---
+
+Un funcionario escribe «quién ganó la licitación» y en segundos aparecen las resoluciones de adjudicación. Ninguna dice «ganó».
+
+Es un archivo de papel que responde preguntas. Se escanea, una inteligencia artificial lo lee y se consulta con las palabras de todos los días. Todo corre dentro de una computadora: los documentos no salen a internet. Un expediente de la Municipalidad se queda en la Municipalidad.
 
 ## El problema
 
@@ -22,41 +26,39 @@ _Pablo Callizo en el archivo de la Municipalidad. Video: Diario Última Hora ([v
 
 Miles de expedientes en papel, apilados. Encontrar uno es buscarlo a mano, hoja por hoja, y hay que saber su número o su título exacto para empezar.
 
-## La solución
-
-Un funcionario escribe "quién ganó la licitación" y en segundos aparecen las resoluciones de adjudicación. Ninguna dice "ganó".
-
-Se escanean los papeles y una inteligencia artificial los lee. Después se pregunta con las propias palabras, como se lo pediría a un colega, sin saber el número ni el título del expediente.
-
-Todo es lo bastante liviano para correr dentro de una computadora, sin enviar los documentos a internet. Un expediente de la Municipalidad se queda en la Municipalidad.
-
 ## La prueba
 
-Para demostrarlo se usaron los documentos de 16 obras del MOPC, escaneados y publicados en la DNCP.
+Usé los documentos de 16 obras del Ministerio de Obras Públicas (MOPC), escaneados y publicados en la Dirección Nacional de Contrataciones Públicas (DNCP).
 
-![Resumen de la prueba: 390 páginas escaneadas, 134 documentos, 16 obras públicas, 24 láminas de planos](/blog/archivo-buscable/buscar.webp)
-
-Entraron 390 hojas mezcladas, como salen del escáner. La IA las leyó, marcó dónde termina un documento y empieza el siguiente, y las agrupó en 134 documentos: actas, adendas, resoluciones, contratos, notas y planos.
-
-<video src="/blog/archivo-buscable/pila.mp4" poster="/blog/archivo-buscable/pila.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Cada cuadrado es una hoja escaneada; al leerlas se colorean por tipo y se agrupan en documentos" style="width:100%;border-radius:12px"></video>
-
-Con todo ordenado, se puede preguntar. Los planos también se buscan, aunque un plano escaneado sea solo una imagen. Escribir "parada de colectivo con techo" encuentra la lámina del refugio para dársenas, aunque el plano no diga "parada", "colectivo" ni "techo" en ninguna parte.
+Los planos también se buscan, aunque un plano escaneado sea solo una imagen. Escribir "parada de colectivo con techo" encuentra la lámina del refugio para dársenas, aunque el plano no diga "parada", "colectivo" ni "techo" en ninguna parte.
 
 <video src="/blog/archivo-buscable/parada.mp4" poster="/blog/archivo-buscable/parada.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Se busca parada de colectivo con techo y aparece la lámina del refugio para dársenas, con su escala y número" style="width:100%;border-radius:12px"></video>
 
-Para saber si se puede confiar, se comparó cada resultado con los datos oficiales de la DNCP:
+Para llegar ahí entraron 390 hojas mezcladas, como salen del escáner. La IA las leyó, marcó dónde termina un documento y empieza el siguiente, y las agrupó en 134 documentos: actas, adendas, resoluciones, contratos, notas y planos.
+
+![Resumen de la prueba: 390 páginas escaneadas, 134 documentos, 16 obras públicas, 24 láminas de planos](/blog/archivo-buscable/buscar.webp)
+
+<video src="/blog/archivo-buscable/pila.mp4" poster="/blog/archivo-buscable/pila.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Cada cuadrado es una hoja escaneada; al leerlas se colorean por tipo y se agrupan en documentos" style="width:100%;border-radius:12px"></video>
+
+Para saber si se puede confiar, medí el resultado:
 
 ![97% de números de llamado correctos, 94% de páginas bien clasificadas, 93% de cortes correctos](/blog/archivo-buscable/calidad.webp)
 
-- **97%** de los números de llamado (el identificador de cada licitación) coinciden con el portal oficial.
+- **97%** de los números de llamado (el identificador de cada licitación) coinciden con el portal oficial de la DNCP.
 - **94%** de las hojas quedaron con su tipo correcto: contrato, acta, resolución, nota o plano.
-- **93%** de los cortes entre un documento y el siguiente cayeron donde correspondía.
+- **93%** de las veces el sistema acertó dónde termina un documento y empieza otro.
 
 Los tipos y los cortes se midieron con 6 obras que el sistema nunca vio al prepararse.
 
 Cada resultado muestra la hoja original, así que cualquier dato se verifica con el papel a la vista.
 
 <video src="/blog/archivo-buscable/original.mp4" poster="/blog/archivo-buscable/original.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Se abre un documento: la hoja escaneada, sus datos y el enlace al PDF original en la DNCP" style="width:100%;border-radius:12px"></video>
+
+## Y el archivo completo de la Municipalidad
+
+Si yo digitalizara el archivo, estimo una base consultable de alrededor de 1 millón de documentos en 14 meses. Hacen falta 3 personas trabajando 4 horas por día y un escáner de 40 páginas por minuto. El equipamiento (el escáner, más una Mac mini con almacenamiento y respaldo para la inteligencia artificial) costaría alrededor de US$4.500. Ese número es solo el equipamiento; el costo del equipo de trabajo lo definimos según el alcance.
+
+Contacto: [sirsebastianrojas@gmail.com](mailto:sirsebastianrojas@gmail.com)
 
 ## Detalles técnicos
 
@@ -65,11 +67,5 @@ Para quien quiera saber cómo funciona por dentro:
 - **Lectura:** técnicas de OCR convierten cada hoja escaneada en texto, planos incluidos.
 - **Clasificación:** las señales que usaría un archivista (título, número de página, número de llamado, firmas) se combinan en un modelo estadístico pequeño que decide el tipo de cada hoja y dónde empieza cada documento. Se ajustó con otras 10 obras; las 6 de la prueba quedaron afuera.
 - **Búsqueda:** un modelo de embeddings representa cada texto por su significado, y por eso una consulta encuentra documentos que no repiten sus palabras.
-
-## Y el archivo completo de la Municipalidad
-
-Si yo digitalizara el archivo, estimo una base consultable de alrededor de 1 millón de documentos en 14 meses. Hacen falta 3 personas trabajando 4 horas por día y un escáner de 40 páginas por minuto. El equipamiento (el escáner, más una Mac mini con almacenamiento y respaldo para la inteligencia artificial) costaría alrededor de US$4.500.
-
-Lo desarrollé yo y lo implemento yo. Para conversar el alcance, escribime a [sirsebastianrojas@gmail.com](mailto:sirsebastianrojas@gmail.com).
 
 _Documentos: DNCP Paraguay, [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)._
