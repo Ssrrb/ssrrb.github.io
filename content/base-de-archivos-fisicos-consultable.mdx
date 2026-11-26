@@ -7,7 +7,16 @@ image: "/blog/archivo-buscable/hero.webp"
 
 Escaneas subís y una inteligencia artificial lo lee, vos consultas con lenguaje natural. Todo corre privado dentro de una computadora. Ejemplo: Un expediente de la Municipalidad se queda en la Municipalidad.
 
-<video src="/blog/archivo-buscable/sin-internet.mp4" poster="/blog/archivo-buscable/sin-internet.jpg" controls muted playsinline preload="metadata" aria-label="Con el Wi-Fi apagado, se busca parada de bus techada, puente sobre el río y obreros, y aparecen el plano y las fotos" style="width:100%;border-radius:12px"></video>
+<video
+  src="/blog/archivo-buscable/sin-internet.mp4"
+  poster="/blog/archivo-buscable/sin-internet.jpg"
+  controls
+  muted
+  playsinline
+  preload="metadata"
+  aria-label="Con el Wi-Fi apagado, se busca parada de bus techada, puente sobre el río y obreros, y aparecen el plano y las fotos"
+  style="width:100%;border-radius:12px"
+></video>
 
 _Con el Wi-Fi apagado: "parada de bus techada" encuentra el plano del refugio, y "puente sobre el río" trae fotos de puentes que no tienen una sola palabra escrita._
 
@@ -34,13 +43,33 @@ Usé los documentos de 16 obras del Ministerio de Obras Públicas (MOPC), escane
 
 Los planos también se buscan, aunque un plano escaneado sea solo una imagen. Escribir "parada de colectivo con techo" encuentra la lámina del refugio para dársenas, aunque el plano no diga "parada", "colectivo" ni "techo" en ninguna parte.
 
-<video src="/blog/archivo-buscable/parada.mp4" poster="/blog/archivo-buscable/parada.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Se busca parada de colectivo con techo y aparece la lámina del refugio para dársenas, con su escala y número" style="width:100%;border-radius:12px"></video>
+<video
+  src="/blog/archivo-buscable/parada.mp4"
+  poster="/blog/archivo-buscable/parada.jpg"
+  autoplay
+  muted
+  loop
+  playsinline
+  preload="metadata"
+  aria-label="Se busca parada de colectivo con techo y aparece la lámina del refugio para dársenas, con su escala y número"
+  style="width:100%;border-radius:12px"
+></video>
 
 Para llegar ahí entraron 390 hojas mezcladas, como salen del escáner. La IA las leyó, marcó dónde termina un documento y empieza el siguiente, y las agrupó en 134 documentos: actas, adendas, resoluciones, contratos, notas y planos.
 
 ![Resumen de la prueba: 390 páginas escaneadas, 134 documentos, 16 obras públicas, 24 láminas de planos](/blog/archivo-buscable/buscar.webp)
 
-<video src="/blog/archivo-buscable/pila.mp4" poster="/blog/archivo-buscable/pila.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Cada cuadrado es una hoja escaneada; al leerlas se colorean por tipo y se agrupan en documentos" style="width:100%;border-radius:12px"></video>
+<video
+  src="/blog/archivo-buscable/pila.mp4"
+  poster="/blog/archivo-buscable/pila.jpg"
+  autoplay
+  muted
+  loop
+  playsinline
+  preload="metadata"
+  aria-label="Cada cuadrado es una hoja escaneada; al leerlas se colorean por tipo y se agrupan en documentos"
+  style="width:100%;border-radius:12px"
+></video>
 
 Para saber si se puede confiar, medí el resultado:
 
@@ -54,11 +83,21 @@ Los tipos y los cortes se midieron con 6 obras que el sistema nunca vio al prepa
 
 Cada resultado muestra la hoja original, así que cualquier dato se verifica con el papel a la vista.
 
-<video src="/blog/archivo-buscable/original.mp4" poster="/blog/archivo-buscable/original.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Se abre un documento: la hoja escaneada, sus datos y el enlace al PDF original en la DNCP" style="width:100%;border-radius:12px"></video>
+<video
+  src="/blog/archivo-buscable/original.mp4"
+  poster="/blog/archivo-buscable/original.jpg"
+  autoplay
+  muted
+  loop
+  playsinline
+  preload="metadata"
+  aria-label="Se abre un documento: la hoja escaneada, sus datos y el enlace al PDF original en la DNCP"
+  style="width:100%;border-radius:12px"
+></video>
 
 ## Y el archivo completo de la Municipalidad
 
-Si yo digitalizara el archivo, estimo una base consultable de alrededor de 1 millón de documentos en 14 meses. Hacen falta 3 personas trabajando 4 horas por día y un escáner de 40 páginas por minuto. El equipamiento (el escáner, más una Mac mini con almacenamiento y respaldo para la inteligencia artificial) costaría alrededor de US$4.500. Ese número es solo el equipamiento; el costo del equipo de trabajo lo definimos según el alcance.
+Si yo digitalizara el archivo, estimo una base consultable de alrededor de 1 millón de documentos en 14 meses. Hacen falta 3 personas trabajando 4 horas por día y un escáner de 40 páginas por minuto. El equipamiento (el escáner, más una Mac mini con almacenamiento y respaldo para la inteligencia artificial) costaría alrededor de US$4.500. Ese número es solo el equipamiento; el costo del equipo de trabajo no está incluido.
 
 Contacto: [sirsebastianrojas@gmail.com](mailto:sirsebastianrojas@gmail.com)
 
@@ -69,5 +108,6 @@ Para quien quiera saber cómo funciona por dentro:
 - **Lectura:** técnicas de OCR convierten cada hoja escaneada en texto, planos incluidos.
 - **Clasificación:** las señales que usaría un archivista (título, número de página, número de llamado, firmas) se combinan en un modelo estadístico pequeño que decide el tipo de cada hoja y dónde empieza cada documento. Se ajustó con otras 10 obras; las 6 de la prueba quedaron afuera.
 - **Búsqueda:** un modelo de embeddings representa cada texto por su significado, y por eso una consulta encuentra documentos que no repiten sus palabras.
+- **Modelo propio:** también entrené un modelo pequeño con LoRA, una técnica que ajusta solo una fracción de los parámetros y permite adaptarlo a estos documentos sin reentrenarlo entero.
 
 _Documentos: DNCP Paraguay, [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)._
