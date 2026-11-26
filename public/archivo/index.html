@@ -91,6 +91,15 @@ section{padding:48px 0;border-top:1px solid var(--rule);display:grid;gap:22px}
 .examples{display:flex;flex-wrap:wrap;gap:6px;font-size:.85rem}
 .examples button{all:unset;cursor:pointer;color:var(--accent);border-bottom:1px dashed currentColor}
 .meta-line{font-size:.85rem;color:var(--muted)}
+.fotos{margin:4px 0 22px}.fhead{margin-bottom:10px;font-size:.95rem}.fhead .muted{color:var(--muted)}
+.fgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:10px}
+.foto{display:grid;gap:6px;background:var(--surface);border:1px solid var(--rule);border-radius:12px;padding:6px;cursor:pointer;text-align:left;color:inherit;font:inherit;transition:border-color .15s,transform .15s}
+.foto:hover{border-color:var(--accent);transform:translateY(-2px)}
+.foto img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:8px;background:var(--rule)}
+.foto span{font-size:.78rem;color:var(--muted);padding:0 4px 2px}.foto b{color:var(--ink,inherit)}
+#fviewer{border:0;padding:0;border-radius:14px;max-width:min(1100px,94vw);background:var(--surface);color:inherit}
+#fviewer::backdrop{background:rgba(0,0,0,.6)}#fviewer img{display:block;max-width:100%;max-height:78vh;margin:0 auto}
+#fviewer .fbar{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;padding:12px 16px;font-size:.9rem}
 .results{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:14px}
 .card{display:grid;grid-template-columns:92px minmax(0,1fr);gap:14px;background:var(--surface);border:1px solid var(--rule);border-radius:12px;padding:12px;cursor:pointer;text-align:left;color:inherit;font:inherit;transition:border-color .15s,transform .15s}
 .card:hover{border-color:var(--accent);transform:translateY(-1px)}
@@ -177,6 +186,7 @@ footer{border-top:1px solid var(--rule);padding:28px 0 0;font-size:.85rem;color:
     <div class="kpi"><b data-n="documentos">0</b><span>documentos separados</span></div>
     <div class="kpi"><b data-n="obras">0</b><span>obras públicas</span></div>
     <div class="kpi" hidden><b data-n="laminas_de_planos">0</b><span>láminas de planos</span></div>
+    <div class="kpi" hidden><b id="kpiFotos">0</b><span>fotos de obra</span></div>
     <div class="kpi"><b data-n="palabras">0</b><span>palabras leídas</span></div>
   </div>
 </header>
@@ -212,6 +222,7 @@ footer{border-top:1px solid var(--rule);padding:28px 0 0;font-size:.85rem;color:
     <div class="chips" id="obraChips"></div>
   </div>
   <div class="meta-line" id="count"></div>
+  <div class="fotos" id="fotos" hidden><div class="fhead"><b>Fotos de obra</b> <span class="muted">sin una sola palabra escrita, encontradas por lo que muestran</span></div><div class="fgrid" id="fgrid"></div></div>
   <div class="results" id="results"></div>
   <button class="btn more" id="more" type="button" hidden>Ver más</button>
 </section>
@@ -270,6 +281,8 @@ footer{border-top:1px solid var(--rule);padding:28px 0 0;font-size:.85rem;color:
 
 <div class="peek" id="peek"><img alt=""><div></div></div>
 
+<dialog id="fviewer" aria-label="Foto"><img id="fImg" alt="Foto de obra"><div class="fbar"><span id="fInfo"></span><span class="vlinks" id="fLinks"></span><button class="btn" id="fClose" type="button">Cerrar</button></div></dialog>
+
 <dialog id="viewer" aria-label="Documento">
   <div class="viewer">
     <div class="vhead">
@@ -292,7 +305,7 @@ footer{border-top:1px solid var(--rule);padding:28px 0 0;font-size:.85rem;color:
 const BASE = new URL('.', location.href).href;
 const ABS = 'https://ssrrb.github.io/archivo';
 const TYPES = {acta:'Acta',adenda:'Adenda',contrato:'Contrato',dictamen:'Dictamen',informe:'Informe',nota:'Nota',poliza:'Póliza',resolucion:'Resolución',plano:'Plano',documento:'Documento'};
-const EXAMPLES = ['quién ganó la licitación','parada de colectivo con techo','protección con gaviones','evaluación de la situación financiera de los oferentes','prórroga del plazo por lluvias','acta de apertura de ofertas','garantía bancaria del contratista','Benito Roggio'];
+const EXAMPLES = ['puente','obreros','camión','quién ganó la licitación','parada de colectivo con techo','protección con gaviones','evaluación de la situación financiera de los oferentes','prórroga del plazo por lluvias','acta de apertura de ofertas','garantía bancaria del contratista','Benito Roggio'];
 const $ = s => document.querySelector(s);
 const col = t => `var(--t-${t || 'documento'})`;
 const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -303,7 +316,7 @@ const stem = w => w.length > 4 ? w.replace(/(es|s)$/, '') : w;
 const STOP = new Set('de la el los las del en y a que por con para un una se al o su lo es como mas sus fue son este esta'.split(' '));
 const words = s => (foldc(s).match(/[a-z0-9]+/g) || []).filter(w => !STOP.has(w)).map(stem);
 
-let INDEX, CORPUS, OBRAS, STATS, bm, VEC = null, state = {q:'', tipo:null, obra:null, shown:12};
+let INDEX, CORPUS, OBRAS, STATS, bm, VEC = null, FOT = null, state = {q:'', tipo:null, obra:null, shown:12};
 
 function BM25(texts){
   const tf = texts.map(t => { const m = new Map(); for (const w of words(t)) m.set(w, (m.get(w)||0)+1); return m; });
@@ -430,9 +443,31 @@ function render(){
       <div class="body"><span class="tag" style="color:${col(d.tipo)}"><i style="background:${col(d.tipo)}"></i>${d.tipo_label} · ${d.id}</span>
       <div class="snip">${snippet(text, q)}</div><div class="facts">${facts}</div></div></button>`;
   }).join('');
+  fotos();
   $('#more').hidden = list.length <= state.shown;
   document.querySelectorAll('.card').forEach(b => b.onclick = () => openDoc(b.dataset.id, 0));
 }
+
+function fotos(){
+  // Photos have no text: the image and the query are embedded by the same local model, and the closest ones show.
+  const fq = FOT && (FOT.q[normq(state.q)] || (VEC && VEC.q[normq(state.q)]));
+  let hits = [];
+  if (fq) {
+    const s = FOT.v.map((v, i) => [dot(v, fq), FOT.fotos[i]]).sort((a, b) => b[0] - a[0]);
+    if (s[0][0] >= 0.65) hits = s.filter(x => x[0] >= s[0][0] - 0.035).slice(0, 8).map(x => x[1]);
+  }
+  $('#fotos').hidden = !hits.length;
+  $('#fgrid').innerHTML = hits.map(f => `<button class="foto" type="button" data-f="${f.id}"><img loading="lazy" src="${BASE + f.miniatura}" alt="Foto de obra, llamado ${f.llamado}"><span>llamado <b>${f.llamado}</b> · pág. ${f.pagina_pdf}</span></button>`).join('');
+  document.querySelectorAll('.foto').forEach(b => b.onclick = () => openFoto(FOT.fotos.find(f => f.id === b.dataset.f)));
+}
+function openFoto(f){
+  $('#fImg').src = BASE + f.imagen;
+  $('#fInfo').innerHTML = `Llamado <b>${f.llamado}</b> · ${esc(f.documento.replace(/_\d{6,}/, '').replace(/\.pdf$/i, '').replace(/_/g, ' '))} · pág. ${f.pagina_pdf}`;
+  $('#fLinks').innerHTML = `<a href="${esc(f.original)}" target="_blank" rel="noopener">PDF original en la DNCP</a>`;
+  $('#fviewer').showModal();
+}
+$('#fClose').onclick = () => $('#fviewer').close();
+$('#fviewer').addEventListener('click', e => { if (e.target === $('#fviewer')) $('#fviewer').close(); });
 
 /* ---------- viewer ---------- */
 let cur = null, curPage = 0;
@@ -544,6 +579,11 @@ async function boot(){
     const v = await j('api/v1/vectors.json');
     VEC = {docs: CORPUS.map(d => unpack(v.documentos[d.id])), q: Object.fromEntries(Object.entries(v.consultas).map(([k, b]) => [normq(k), unpack(b)]))};
   } catch (e) { VEC = null; }
+  try {
+    const f = await j('api/v1/fotos.json');
+    FOT = {fotos: f.fotos, v: f.fotos.map(x => unpack(f.vectores[x.id])), q: Object.fromEntries(Object.entries(f.consultas).map(([k, b]) => [normq(k), unpack(b)]))};
+    const k = $('#kpiFotos'); if (k) { k.parentNode.hidden = false; count(k, f.fotos.length); }
+  } catch (e) { FOT = null; }
   chips(); render();
   const params = new URLSearchParams(location.search);
   if (params.get('q')) { $('#q').value = state.q = params.get('q'); render(); }
