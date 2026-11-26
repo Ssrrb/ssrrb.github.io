@@ -292,7 +292,7 @@ footer{border-top:1px solid var(--rule);padding:28px 0 0;font-size:.85rem;color:
 const BASE = new URL('.', location.href).href;
 const ABS = 'https://ssrrb.github.io/archivo';
 const TYPES = {acta:'Acta',adenda:'Adenda',contrato:'Contrato',dictamen:'Dictamen',informe:'Informe',nota:'Nota',poliza:'Póliza',resolucion:'Resolución',plano:'Plano',documento:'Documento'};
-const EXAMPLES = ['quién ganó la licitación','protección con gaviones','parada de ómnibus con techo en dársena','evaluación de la situación financiera de los oferentes','prórroga del plazo por lluvias','acta de apertura de ofertas','garantía bancaria del contratista','Benito Roggio'];
+const EXAMPLES = ['quién ganó la licitación','parada de colectivo con techo','protección con gaviones','evaluación de la situación financiera de los oferentes','prórroga del plazo por lluvias','acta de apertura de ofertas','garantía bancaria del contratista','Benito Roggio'];
 const $ = s => document.querySelector(s);
 const col = t => `var(--t-${t || 'documento'})`;
 const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
