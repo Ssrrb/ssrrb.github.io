@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Archivo buscable</title>
-<meta name="description" content="366 páginas escaneadas de 16 obras públicas, leídas por una IA local y consultables por personas y por agentes de IA.">
+<meta name="description" content="366 páginas y 24 láminas de planos de 16 obras públicas, leídas por una IA local y consultables por personas y por agentes de IA.">
 <link rel="alternate" type="text/plain" href="llms.txt" title="llms.txt">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -95,6 +95,7 @@ section{padding:48px 0;border-top:1px solid var(--rule);display:grid;gap:22px}
 .card{display:grid;grid-template-columns:92px minmax(0,1fr);gap:14px;background:var(--surface);border:1px solid var(--rule);border-radius:12px;padding:12px;cursor:pointer;text-align:left;color:inherit;font:inherit;transition:border-color .15s,transform .15s}
 .card:hover{border-color:var(--accent);transform:translateY(-1px)}
 .card img{width:92px;height:120px;object-fit:cover;object-position:top;border-radius:6px;border:1px solid var(--rule);background:var(--bg)}
+.card img.plan{object-fit:contain;object-position:center;background:#fff}
 .card .body{display:grid;gap:6px;align-content:start;min-width:0}
 .tag{font:600 .72rem/1 var(--f-mono);text-transform:uppercase;letter-spacing:.06em;display:inline-flex;align-items:center;gap:6px}
 .tag i{width:8px;height:8px;border-radius:2px}
@@ -291,7 +292,7 @@ footer{border-top:1px solid var(--rule);padding:28px 0 0;font-size:.85rem;color:
 const BASE = new URL('.', location.href).href;
 const ABS = 'https://ssrrb.github.io/archivo';
 const TYPES = {acta:'Acta',adenda:'Adenda',contrato:'Contrato',dictamen:'Dictamen',informe:'Informe',nota:'Nota',poliza:'Póliza',resolucion:'Resolución',plano:'Plano',documento:'Documento'};
-const EXAMPLES = ['prórroga del plazo por lluvias','sección transversal típica','alcantarilla','acta de apertura de ofertas','resolución de adjudicación','Benito Roggio','orden de inicio de obra','descalifica al oferente','Itapúa caminos vecinales','póliza de fiel cumplimiento'];
+const EXAMPLES = ['prórroga del plazo por lluvias','sección transversal típica','protección con gaviones','refugio para dársenas','acta de apertura de ofertas','resolución de adjudicación','Benito Roggio','orden de inicio de obra','descalifica al oferente','Itapúa caminos vecinales','póliza de fiel cumplimiento'];
 const $ = s => document.querySelector(s);
 const col = t => `var(--t-${t || 'documento'})`;
 const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -406,11 +407,11 @@ function render(){
     ? `${list.length} documentos en ${ms < 1 ? '<1' : Math.round(ms)} ms, entre ${fmt(STATS.paginas)} páginas`
     : `${list.length} documentos`;
   $('#results').innerHTML = list.slice(0, state.shown).map(({d, text}) => {
-    const c = d.campos, facts = [c.fecha && `<span><b>${c.fecha.split('-').reverse().join('/')}</b></span>`,
+    const c = d.campos, facts = [c.titulo && `<span><b>${esc(c.titulo)}</b></span>`, c.lamina && `<span>lámina <b>${esc(c.lamina)}</b></span>`, c.escala && `<span>esc. <b>${esc(c.escala)}</b></span>`, c.fecha && `<span><b>${c.fecha.split('-').reverse().join('/')}</b></span>`,
       `<span>llamado <b>${d.llamado}</b></span>`, c.empresa && `<span><b>${esc(c.empresa)}</b></span>`,
       c.monto && `<span><b>${esc(c.monto.texto)}</b></span>`, `<span>${d.paginas} pág.</span>`].filter(Boolean).join('');
     return `<button class="card" type="button" data-id="${d.id}">
-      <img loading="lazy" src="${BASE + d.miniatura}" alt="">
+      <img loading="lazy" src="${BASE + d.miniatura}" alt=""${d.tipo === 'plano' ? ' class="plan"' : ''}>
       <div class="body"><span class="tag" style="color:${col(d.tipo)}"><i style="background:${col(d.tipo)}"></i>${d.tipo_label} · ${d.id}</span>
       <div class="snip">${snippet(text, q)}</div><div class="facts">${facts}</div></div></button>`;
   }).join('');
@@ -426,10 +427,10 @@ async function openDoc(id, page){
   $('#vTag').innerHTML = `<i style="background:${col(d.tipo)}"></i>${d.tipo_label} · ${d.id}`;
   $('#vTag').style.color = col(d.tipo);
   $('#vObra').textContent = `Llamado ${d.llamado} · ${d.obra.titulo}`;
-  const c = d.campos, rows = [['Fecha', c.fecha && c.fecha.split('-').reverse().join('/')], ['Llamado', c.llamado], ['Licitación', c.licitacion],
+  const c = d.campos, rows = [['Lámina', [c.titulo, c.lamina].filter(Boolean).join(' · ')], ['Fecha', c.fecha && c.fecha.split('-').reverse().join('/')], ['Llamado', c.llamado], ['Licitación', c.licitacion],
     ['Empresa', c.empresa], ['RUC', c.ruc], ['Monto', c.monto && c.monto.texto], ['Plazo', c.plazo], ['Escala', c.escala], ['Progresivas', c.progresivas]].filter(r => r[1]);
   $('#vFields').innerHTML = rows.map(([k,v]) => `<dt>${k}</dt><dd>${esc(v)}</dd>`).join('');
-  $('#vLinks').innerHTML = `<a href="${esc(d.original.url)}" target="_blank" rel="noopener">PDF original en la DNCP</a><a href="api/v1/docs/${d.id}.json" target="_blank">JSON de la API</a>`;
+  $('#vLinks').innerHTML = `<a href="${esc(d.original.url)}" target="_blank" rel="noopener">PDF original en la DNCP</a><a href="api/v1/docs/${d.id}.json" target="_blank">JSON de la API</a><a href="${d.paginas[0].imagen.replace(ABS + '/', BASE)}" target="_blank">Ver en grande</a>`;
   showPage();
   const dlg = $('#viewer'); if (!dlg.open) dlg.showModal();
 }
