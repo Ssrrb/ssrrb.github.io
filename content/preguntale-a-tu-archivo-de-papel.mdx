@@ -1,26 +1,38 @@
 ---
-title: "Digitaliza y consulta tus documentos"
+title: "Preguntale a tu archivo de papel"
 publishedAt: "2026-11-26"
 summary: "Un archivo de papel escaneado es consultable con palabras comunes y corre privado dentro de una computadora."
 image: "/blog/archivo-buscable/hero.webp"
 ---
 
-Escaneas subís y una inteligencia artificial lo lee, vos consultas con lenguaje natural. Todo corre privado dentro de una computadora. Ejemplo: Un expediente de la Municipalidad se queda en la Municipalidad.
+Escaneas subís y una inteligencia artificial lo lee, vos escribís con lenguaje natural. Todo corre privado dentro de una computadora. Ejemplo: Un expediente de la Municipalidad se queda en la Municipalidad.
 
 <div>
-<video
-  src="/blog/archivo-buscable/sin-internet.mp4"
-  poster="/blog/archivo-buscable/sin-internet.jpg"
-  controls
-  muted
-  playsinline
-  preload="metadata"
-  aria-label="Con el Wi-Fi apagado, se busca parada de bus techada, puente sobre el río y obreros, y aparecen el plano y las fotos"
-  style="width:100%;border-radius:12px"
-></video>
+  <video
+    src="/blog/archivo-buscable/sin-internet.mp4"
+    poster="/blog/archivo-buscable/sin-internet.jpg"
+    controls
+    muted
+    playsinline
+    preload="metadata"
+    aria-label="Con el Wi-Fi apagado, se busca parada de bus techada, puente sobre el río y obreros, y aparecen el plano y las fotos"
+    style="width:100%;border-radius:12px"
+  ></video>
 </div>
 
-_Con el Wi-Fi apagado: "parada de bus techada" encuentra el plano del refugio, y "puente sobre el río" trae fotos de puentes que no tienen una sola palabra escrita._
+<div>
+  <video
+    src="/blog/archivo-buscable/busqueda-prorroga-por-lluvias.mp4"
+    controls
+    muted
+    playsinline
+    preload="metadata"
+    aria-label="Búsqueda de prórroga por lluvias en el archivo"
+    style="width:100%;border-radius:12px"
+  ></video>
+</div>
+
+_Con el Wi-Fi apagado, la búsqueda entiende tanto imágenes como texto: "parada de bus techada" encuentra el plano del refugio, "puente sobre el río" trae fotos de puentes sin una sola palabra escrita, y "prórroga por lluvias" encuentra el documento escrito correspondiente._
 
 ## El problema
 
@@ -45,22 +57,6 @@ Usé los documentos de 16 obras del Ministerio de Obras Públicas (MOPC), escane
 
 Para llegar ahí entraron 390 hojas mezcladas, como salen del escáner. La IA las leyó, marcó dónde termina un documento y empieza el siguiente, y las agrupó en 134 documentos: actas, adendas, resoluciones, contratos, notas y planos.
 
-![Resumen de la prueba: 390 páginas escaneadas, 134 documentos, 16 obras públicas, 24 láminas de planos](/blog/archivo-buscable/buscar.webp)
-
-<div>
-<video
-  src="/blog/archivo-buscable/pila.mp4"
-  poster="/blog/archivo-buscable/pila.jpg"
-  autoplay
-  muted
-  loop
-  playsinline
-  preload="metadata"
-  aria-label="Cada cuadrado es una hoja escaneada; al leerlas se colorean por tipo y se agrupan en documentos"
-  style="width:100%;border-radius:12px"
-></video>
-</div>
-
 Para saber si se puede confiar, medí el resultado:
 
 ![97% de números de llamado correctos, 94% de páginas bien clasificadas, 93% de cortes correctos](/blog/archivo-buscable/calidad.webp)
@@ -69,13 +65,13 @@ Para saber si se puede confiar, medí el resultado:
 - **94%** de las hojas quedaron con su tipo correcto: contrato, acta, resolución, nota o plano.
 - **93%** de las veces el sistema acertó dónde termina un documento y empieza otro.
 
-Los tipos y los cortes se midieron con 6 obras que el sistema nunca vio al prepararse.
+Los tipos y los cortes se midieron con 10 obras que el sistema nunca vio al prepararse.
 
 Cada resultado muestra la hoja original, así que cualquier dato se verifica con el papel a la vista.
 
-## Y el archivo completo de la Municipalidad
+## Solucionar el archivo completo de la Municipalidad
 
-Si yo digitalizara el archivo, estimo una base consultable de alrededor de 1 millón de documentos en 14 meses. Hacen falta 3 personas trabajando 4 horas por día y un escáner de 40 páginas por minuto. El equipamiento (el escáner, más una Mac mini con almacenamiento y respaldo para la inteligencia artificial) costaría alrededor de US$4.500. Ese número es solo el equipamiento; el costo del equipo de trabajo no está incluido.
+Con una base consultable de alrededor de 1 millón de documentos estimo que se completaría en 14 meses con 3 personas trabajando 4 horas por día y un escáner de 40 páginas por minuto. El equipamiento (el escáner, más una PC con almacenamiento y respaldo para la inteligencia artificial) costaría alrededor de US$4.500. Ese número es solo de infraestructura; el costo del equipo de trabajo no está incluido.
 
 Contacto: [sirsebastianrojas@gmail.com](mailto:sirsebastianrojas@gmail.com)
 
