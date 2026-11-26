@@ -9,7 +9,11 @@ const createConfig = (phase) => {
 
   const nextConfig = {
     reactStrictMode: true,
-    ...(isDev ? {} : { output: "export" }),
+    agentRules: false,
+    // Dev no sirve public/**/index.html en carpetas; en el export estático sí.
+    ...(isDev
+      ? { rewrites: async () => [{ source: "/archivo", destination: "/archivo/index.html" }] }
+      : { output: "export" }),
     trailingSlash: true,
     images: {
       unoptimized: true,

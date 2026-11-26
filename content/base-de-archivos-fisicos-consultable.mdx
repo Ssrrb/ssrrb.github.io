@@ -1,46 +1,69 @@
 ---
-title: "Base de archivos físicos consultable"
+title: "Un archivo de papel que responde preguntas"
 publishedAt: "2026-11-26"
-summary: "Escanear los archivos y consultarlos en lenguaje natural con IA local, sin salir a internet. Probado con 16 obras públicas del MOPC: 97% de precisión en números."
+summary: "Escaneamos 390 hojas de 16 obras públicas y las dejamos consultables en lenguaje natural. La IA corre dentro de una computadora y los documentos no salen a internet."
 image: "/blog/archivo-buscable/hero.webp"
 ---
 
 ## El problema
 
-<iframe src="https://www.instagram.com/reel/Df-ORWxDa0-/embed" width="100%" height="680" frameborder="0" scrolling="no" allowtransparency="true" title="Archivo de la Municipalidad, Última Hora" style="max-width:420px;border:0;border-radius:12px"></iframe>
+<iframe
+  src="https://www.instagram.com/reel/Df-ORWxDa0-/embed"
+  width="100%"
+  height="680"
+  frameborder="0"
+  scrolling="no"
+  allowtransparency="true"
+  title="Archivo de la Municipalidad, Última Hora"
+  style="max-width:420px;border:0;border-radius:12px"
+></iframe>
 
-*Pablo Callizo en el archivo de la Municipalidad. Video: Diario Última Hora ([ver en Instagram](https://www.instagram.com/reel/Df-ORWxDa0-/)).*
+_Pablo Callizo en el archivo de la Municipalidad. Video: Diario Última Hora ([ver en Instagram](https://www.instagram.com/reel/Df-ORWxDa0-/))._
 
-Miles de expedientes en papel, apilados. Encontrar uno es buscarlo a mano, hoja por hoja.
+Miles de expedientes en papel, apilados. Encontrar uno es buscarlo a mano, hoja por hoja, y hay que saber su número o su título exacto para empezar.
 
 ## La solución
 
-Escanear los archivos y usar modelos de IA **locales**, que corren dentro de una computadora **sin salir a internet**. Con eso, cualquier persona puede buscar en lenguaje natural entre contratos, resoluciones, planos e imágenes, y encontrar el documento en segundos.
+Se escanean los papeles y una inteligencia artificial los lee. Después, cualquier funcionario escribe lo que busca con sus propias palabras, como se lo pediría a un colega, y la hoja aparece en segundos.
 
-![Una búsqueda en lenguaje natural: la hoja escaneada, su texto y sus datos](/blog/archivo-buscable/buscar.webp)
+Para ordenar las hojas entrené un modelo propio, pequeño y especializado en reconocer el tipo de cada una y dónde termina cada documento. Ser pequeño es lo que le permite correr dentro de una computadora y no enviar los documentos a internet. Un expediente de la Municipalidad se queda en la Municipalidad.
 
 ## La prueba
 
-Para demostrarlo cargamos **16 obras del MOPC**, con sus documentos escaneados publicados en la DNCP. Las hojas entran mezcladas y la IA las separa en documentos y las clasifica según su tipo: actas, adendas, resoluciones, contratos, notas, planos.
+Para demostrarlo se usaron los documentos de 16 obras del MOPC, escaneados y publicados en la DNCP.
 
-![La pila de hojas, separada y clasificada por tipo](/blog/archivo-buscable/pila.webp)
+![Resumen de la prueba: 390 páginas escaneadas, 134 documentos, 16 obras públicas, 24 láminas de planos](/blog/archivo-buscable/buscar.webp)
 
-También buscamos información dentro de planos, imágenes y referencias. "Protección con gaviones" encuentra la lámina exacta, con su escala y número.
+Entraron 390 hojas mezcladas, como salen del escáner. La IA las leyó, marcó dónde termina un documento y empieza el siguiente, y las agrupó en 134 documentos: actas, adendas, resoluciones, contratos, notas y planos.
 
-![Un plano encontrado por lo que dice](/blog/archivo-buscable/planos.webp)
+![Cada cuadrado es una hoja escaneada, antes de ser leída y ordenada](/blog/archivo-buscable/pila.webp)
 
-Los resultados, medidos contra los datos oficiales de la DNCP:
+Con todo ordenado, se puede preguntar. Los planos también se buscan, aunque un plano escaneado sea solo una imagen. Escribir "protección con gaviones" devuelve la lámina exacta, con su escala y número.
 
-![97% de precisión en números, 94% de páginas bien clasificadas, 93% de precisión en los cortes](/blog/archivo-buscable/calidad.webp)
+![Resultados de una búsqueda: cada documento con su tipo, su fecha y el número de llamado](/blog/archivo-buscable/planos.webp)
 
-- **97%** de precisión en números.
-- **94%** de páginas clasificadas de manera correcta.
-- **93%** de precisión en los cortes entre documentos.
+Para saber si se puede confiar, se comparó cada resultado con los datos oficiales de la DNCP:
 
-## Probalo
+![97% de números de llamado correctos, 94% de páginas bien clasificadas, 93% de cortes correctos](/blog/archivo-buscable/calidad.webp)
 
-**[Abrir la demo →](/archivo/)**
+- **97%** de los números de llamado (el identificador de cada licitación) coinciden con el portal oficial.
+- **94%** de las hojas quedaron con su tipo correcto: contrato, acta, resolución, nota o plano.
+- **93%** de los cortes entre un documento y el siguiente cayeron donde correspondía.
 
-La base también se puede consultar desde otros sistemas y asistentes de IA, a través de una [API abierta](/archivo/llms.txt).
+Cada resultado muestra la hoja original, así que cualquier dato se verifica con el papel a la vista.
 
-*Documentos: DNCP Paraguay, [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).*
+## Detalles técnicos
+
+Para quien quiera saber cómo funciona por dentro:
+
+- **Lectura:** técnicas de OCR convierten cada hoja escaneada en texto, planos incluidos.
+- **Clasificación:** un modelo de 1.7B de parámetros (LFM3), entrenado con LoRA para esta tarea, reconoce el tipo de cada hoja y los cortes entre documentos. Del entrenamiento solo se usaron unas pocas hojas, como ejemplo del formato.
+- **Búsqueda:** un modelo de embeddings representa cada texto por su significado, y por eso una consulta encuentra documentos que no repiten sus palabras.
+
+## Probarlo con el archivo de la Municipalidad
+
+Lo desarrollé yo y lo implemento. La propuesta es una prueba con una parte del archivo que la Municipalidad elija, medida igual que esta: cuántos números, tipos y cortes salen bien.
+
+Para coordinarla, escribir a [sirsebastianrojas@gmail.com](mailto:sirsebastianrojas@gmail.com).
+
+_Documentos: DNCP Paraguay, [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)._
