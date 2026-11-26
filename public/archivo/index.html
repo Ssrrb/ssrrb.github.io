@@ -415,6 +415,17 @@ function rrf(key, sem){
   rank(sem).slice(0, 12).forEach((i, r) => out[i] += 1 / (k + r + 1));
   return out;
 }
+// Any other phrase: a local copy can embed it live (servir.py on the same machine, EmbeddingGemma 2, no internet).
+// On the public site there is no such endpoint, so the first miss turns this off and search stays on words.
+let LIVE = true; const QV = {};
+function qvec(s){
+  const k = normq(s); if (!k) return null;
+  const pre = (VEC && VEC.q[k]) || (FOT && FOT.q[k]); if (pre) return pre;
+  if (k in QV) return QV[k];
+  if (LIVE) { QV[k] = null; fetch('/embed?q=' + encodeURIComponent(s.trim())).then(r => r.ok ? r.json() : Promise.reject())
+    .then(j => { QV[k] = unpack(j.v); if (normq(state.q) === k) render(); }).catch(() => { LIVE = false; delete QV[k]; }); }
+  return null;
+}
 function unpack(b64){ const bin = atob(b64), v = new Float32Array(bin.length); for (let i = 0; i < bin.length; i++) v[i] = ((bin.charCodeAt(i) << 24) >> 24) / 127; return v; }
 
 function render(){
@@ -423,8 +434,8 @@ function render(){
   const q = words(state.q), t0 = performance.now();
   let scores = q.length ? bm(q) : null;
   // Meaning: example questions were embedded ahead of time by the same local model as the documents.
-  const qv = VEC && VEC.q[normq(state.q)];
-  if (qv) scores = rrf(scores, VEC.docs.map(v => dot(v, qv)));
+  const qv = qvec(state.q);
+  if (qv && VEC) scores = rrf(scores, VEC.docs.map(v => dot(v, qv)));
   let list = INDEX.documentos.map((d, i) => ({d, s: scores ? scores[i] : 0, text: CORPUS[i].texto}))
     .filter(x => (!state.tipo || x.d.tipo === state.tipo) && (!state.obra || x.d.llamado === state.obra) && (!scores || x.s > 0));
   if (scores) list.sort((a,b) => b.s - a.s);
@@ -448,7 +459,7 @@ function render(){
 
 function fotos(){
   // Photos have no text: the image and the query are embedded by the same local model, and the closest ones show.
-  const fq = FOT && (FOT.q[normq(state.q)] || (VEC && VEC.q[normq(state.q)]));
+  const fq = FOT && qvec(state.q);
   let hits = [];
   if (fq) {
     const s = FOT.v.map((v, i) => [dot(v, fq), FOT.fotos[i]]).sort((a, b) => b[0] - a[0]);
