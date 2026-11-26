@@ -6,7 +6,7 @@ import { useEffect } from "react";
 // retry once they scroll into view, so play each one when it is visible.
 export function PostVideos() {
   useEffect(() => {
-    const videos = document.querySelectorAll<HTMLVideoElement>("article video");
+    const videos = document.querySelectorAll<HTMLVideoElement>("article video[autoplay]");
     const observer = new IntersectionObserver(
       (entries) => {
         for (const { target, isIntersecting } of entries) {
