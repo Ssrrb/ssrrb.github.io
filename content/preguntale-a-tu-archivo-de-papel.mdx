@@ -32,7 +32,7 @@ Mucho de lo que una institución sabe está en papeles que nadie vuelve a leer, 
   ></video>
 </div>
 
-_Con el Wi-Fi apagado, la búsqueda entiende tanto imágenes como texto: "parada de bus techada" encuentra el plano del refugio, "puente sobre el río" trae fotos de puentes sin una sola palabra escrita, y "prórroga por lluvias" encuentra el documento escrito correspondiente._
+_Sin internet: "parada de bus techada" trae el plano del refugio, "puente sobre el río" trae fotos sin una palabra escrita y "prórroga por lluvias" encuentra el documento._
 
 ## El problema
 
@@ -49,39 +49,30 @@ _Con el Wi-Fi apagado, la búsqueda entiende tanto imágenes como texto: "parada
 
 _Pablo Callizo en el archivo de la Municipalidad. Video: Diario Última Hora ([ver en Instagram](https://www.instagram.com/reel/Df-ORWxDa0-/))._
 
-Miles de expedientes en papel, apilados. Encontrar uno es buscarlo a mano, hoja por hoja, y hay que saber su número o su título exacto para empezar.
+Miles de expedientes apilados en papel. Para encontrar uno hay que saber su número exacto y buscarlo a mano, hoja por hoja.
 
 ## La prueba
 
-Usé los documentos de 16 obras del Ministerio de Obras Públicas (MOPC), escaneados y publicados en la Dirección Nacional de Contrataciones Públicas (DNCP). También cargué 22 fotos de obras viales, sacadas de informes publicados en la DNCP: no tienen una sola palabra escrita y se encuentran por lo que muestran.
-
-Para llegar ahí entraron 390 hojas mezcladas, como salen del escáner. La IA las leyó, marcó dónde termina un documento y empieza el siguiente, y las agrupó en 134 documentos: actas, adendas, resoluciones, contratos, notas y planos.
-
-Para saber si se puede confiar, medí el resultado:
+Probé con 390 hojas escaneadas de 16 obras del MOPC, publicadas en la DNCP, y 22 fotos de obras sin texto. La IA leyó cada hoja, separó los documentos y los clasificó: actas, contratos, resoluciones, notas y planos. Las fotos se encuentran por lo que muestran.
 
 ![97% de números de llamado correctos, 94% de páginas bien clasificadas, 93% de cortes correctos](/blog/archivo-buscable/calidad.webp)
 
-- **97%** de los números de llamado (el identificador de cada licitación) coinciden con el portal oficial de la DNCP.
-- **94%** de las hojas quedaron con su tipo correcto: contrato, acta, resolución, nota o plano.
-- **93%** de las veces el sistema acertó dónde termina un documento y empieza otro.
-
-Las tres cifras se midieron con 6 de las 16 obras, que el sistema nunca vio al prepararse.
-
-Cada resultado muestra la hoja original, así que cualquier dato se verifica con el papel a la vista.
+En 6 obras que el sistema nunca había visto, acertó el número de licitación el 97% de las veces, el tipo de hoja el 94% y el corte entre documentos el 93%. Cada resultado muestra el papel original para verificarlo.
 
 ## Solucionar el archivo completo de la Municipalidad
 
-Con una base consultable de alrededor de 1 millón de documentos estimo que se completaría en 14 meses con 3 personas trabajando 4 horas por día y un escáner de 40 páginas por minuto. El equipamiento (el escáner, más una PC con almacenamiento y respaldo para la inteligencia artificial) costaría alrededor de US$4.500. Ese número es solo de infraestructura; el costo del equipo de trabajo no está incluido.
+El archivo completo, alrededor de 1 millón de documentos, se digitaliza en unos 14 meses con 3 personas a medio tiempo y un escáner de 40 páginas por minuto. El equipo cuesta unos US$4.500, sin contar sueldos.
 
 Contacto: [sirsebastianrojas@gmail.com](mailto:sirsebastianrojas@gmail.com)
 
-## Detalles técnicos
-
-Para quien quiera saber cómo funciona por dentro:
-
-- **Lectura:** técnicas de OCR convierten cada hoja escaneada en texto, planos incluidos.
-- **Clasificación:** las señales que usaría un archivista (título, número de página, número de llamado, firmas) se combinan en un modelo estadístico pequeño que decide el tipo de cada hoja y dónde empieza cada documento. Se ajustó con otras 10 obras; las 6 de la prueba quedaron afuera.
-- **Búsqueda:** un modelo de embeddings representa cada texto por su significado, y por eso una consulta encuentra documentos que no repiten sus palabras.
-- **Modelo propio:** también entrené un modelo pequeño con LoRA, una técnica que ajusta solo una fracción de los parámetros y permite adaptarlo a estos documentos sin reentrenarlo entero.
+<details style="font-size:0.85em;opacity:0.85">
+  <summary>Anexo técnico</summary>
+  <ul>
+    <li><strong>Lectura:</strong> OCR convierte cada hoja en texto, planos incluidos.</li>
+    <li><strong>Clasificación:</strong> señales de archivista (título, página, número de llamado, firmas) alimentan un modelo estadístico pequeño, ajustado con otras 10 obras.</li>
+    <li><strong>Búsqueda:</strong> embeddings que representan texto e imágenes por su significado.</li>
+    <li><strong>Modelo propio:</strong> un modelo pequeño ajustado con LoRA a estos documentos.</li>
+  </ul>
+</details>
 
 _Documentos: DNCP Paraguay, [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)._
