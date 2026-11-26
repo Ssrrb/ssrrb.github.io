@@ -6,4 +6,4 @@
 
 - [Guía del archivo para modelos de lenguaje](https://ssrrb.github.io/archivo/llms.txt): 366 páginas escaneadas y 24 láminas de planos de 16 obras públicas del MOPC (Paraguay), separadas en 134 documentos, con API JSON sin clave
 - [OpenAPI](https://ssrrb.github.io/archivo/openapi.json): esquema de la API
-- [Artículo](https://ssrrb.github.io/blog/archivo-buscable-con-ia/): cómo se hizo
+- [Artículo](https://ssrrb.github.io/blog/base-de-archivos-fisicos-consultable/): cómo se hizo

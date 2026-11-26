@@ -1,0 +1,46 @@
+---
+title: "Base de archivos físicos consultable"
+publishedAt: "2026-11-26"
+summary: "Escanear los archivos y consultarlos en lenguaje natural con IA local, sin salir a internet. Probado con 16 obras públicas del MOPC: 97% de precisión en números."
+image: "/blog/archivo-buscable/hero.webp"
+---
+
+## El problema
+
+<iframe src="https://www.instagram.com/reel/Df-ORWxDa0-/embed" width="100%" height="680" frameborder="0" scrolling="no" allowtransparency="true" title="Archivo de la Municipalidad, Última Hora" style="max-width:420px;border:0;border-radius:12px"></iframe>
+
+*Pablo Callizo en el archivo de la Municipalidad. Video: Diario Última Hora ([ver en Instagram](https://www.instagram.com/reel/Df-ORWxDa0-/)).*
+
+Miles de expedientes en papel, apilados. Encontrar uno es buscarlo a mano, hoja por hoja.
+
+## La solución
+
+Escanear los archivos y usar modelos de IA **locales**, que corren dentro de una computadora **sin salir a internet**. Con eso, cualquier persona puede buscar en lenguaje natural entre contratos, resoluciones, planos e imágenes, y encontrar el documento en segundos.
+
+![Una búsqueda en lenguaje natural: la hoja escaneada, su texto y sus datos](/blog/archivo-buscable/buscar.webp)
+
+## La prueba
+
+Para demostrarlo cargamos **16 obras del MOPC**, con sus documentos escaneados publicados en la DNCP. Las hojas entran mezcladas y la IA las separa en documentos y las clasifica según su tipo: actas, adendas, resoluciones, contratos, notas, planos.
+
+![La pila de hojas, separada y clasificada por tipo](/blog/archivo-buscable/pila.webp)
+
+También buscamos información dentro de planos, imágenes y referencias. "Protección con gaviones" encuentra la lámina exacta, con su escala y número.
+
+![Un plano encontrado por lo que dice](/blog/archivo-buscable/planos.webp)
+
+Los resultados, medidos contra los datos oficiales de la DNCP:
+
+![97% de precisión en números, 94% de páginas bien clasificadas, 93% de precisión en los cortes](/blog/archivo-buscable/calidad.webp)
+
+- **97%** de precisión en números.
+- **94%** de páginas clasificadas de manera correcta.
+- **93%** de precisión en los cortes entre documentos.
+
+## Probalo
+
+**[Abrir la demo →](/archivo/)**
+
+La base también se puede consultar desde otros sistemas y asistentes de IA, a través de una [API abierta](/archivo/llms.txt).
+
+*Documentos: DNCP Paraguay, [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).*
